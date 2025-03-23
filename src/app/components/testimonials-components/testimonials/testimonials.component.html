@@ -1,0 +1,29 @@
+<section class="testimonials-section">
+    <h1>Depoimentos</h1>
+  
+    <div class="container-testimonial">
+
+      <div class="testimonial-item" *ngFor="let d of testimonials">
+        <div class="user-icon"></div>
+        <div class="testimonial-content">
+          <h2>{{ d.nome }}</h2>
+          <!-- <p class="short-text" *ngIf="!d.isExpanded">
+            {{ d.shortText }}
+          </p>
+          <p class="full-text" *ngIf="d.isExpanded">
+            {{ d.fullText }}
+          </p> -->
+
+          <p class="full-text" [ngClass]="{'shortText': !d.isExpanded}">
+            {{ d.fullText }}
+          </p>
+
+          <a href="#" class="toggle-text" (click)="toggleText(d, $event)">
+            {{ d.isExpanded ? 'Ver menos' : 'Ver mais' }}
+          </a>
+        </div>
+      </div>
+      
+    </div>
+
+  </section>

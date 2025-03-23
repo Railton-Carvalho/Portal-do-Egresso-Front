@@ -1,0 +1,33 @@
+.dashboard-container {
+    height: 70vh;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    padding: 90px;
+
+}
+.title {
+  font-size: 52px;
+  margin-bottom: 25px;
+  font-weight: bold;
+  text-align: center;
+}
+.cards {
+  display: grid;
+  padding: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 25px;
+}
+.card {
+  background: white;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  p {
+    font-size: 28px;
+    font-weight: bold;
+  }
+}
+

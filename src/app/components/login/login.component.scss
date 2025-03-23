@@ -1,0 +1,139 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-dongle);
+  }
+  
+  body {
+    background-color: var(--gray-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  
+  .login-container {
+    width: 45vw;
+    background-color: white;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tabs {
+    display: flex;
+    width: 100%;
+  }
+  
+  .tab {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 500;
+    background-color: rgb(220, 220, 220);
+    color: #727272;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .tab.active-coordenador {
+    background-color: #00939a;
+    color: white;
+  }
+  
+  .tab.active-egresso {
+    background-color: #0070f0;
+    color: white;
+  }
+  
+  .login-content {
+    padding: 5px 32px 24px;
+  }
+  
+  .divider {
+    border-bottom: 2px solid #d9d9d9;
+    margin-bottom: 32px;
+  }
+  
+  .login-title {
+    font-size: 68px;
+    font-weight: bold;
+    color: #00939a;
+    text-align: center;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-label {
+    display: block;
+    font-size: 28px;
+    font-weight: 500;
+    color: black;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 6px;
+    font-size: 24px;
+    border: 2px solid #d9d9d9;
+    border-radius: 6px;
+  }
+  
+  .login-button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 4px;
+    background-color: #00939a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 28px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .login-button:hover {
+    background-color: #046973;
+  }
+  
+  .login-footer {
+    background-color: rgb(223, 223, 223);
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .footer-text {
+    color: #727272;
+    font-size: 18px;
+  }
+  
+  .register-link {
+    color: #046973;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  
+  .register-link:hover {
+    text-decoration: underline;
+  }
+
+
+  .login-button-coordenador, .active-coordenador  {
+    background-color: #046973;
+  }
+  
+  .login-button-engresso, .active-engresso {
+    background-color: #0070f0;
+    color: white;
+  }
+

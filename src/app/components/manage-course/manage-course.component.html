@@ -1,0 +1,95 @@
+<div class="backdrop" *ngIf="isOpen">
+    <div class="modal">
+      <ng-container [ngSwitch]="mode">
+  
+        <!-- Visualizar -->
+        <div *ngSwitchCase="'visualizar'" class="modal-body">
+          <h2 class="title-view">Visualizar Curso</h2>
+  
+          <div class="view-egresso">
+  
+              <div class="perfil-img">
+                <img src="/assets/icons/user-icon.svg" alt="foto de perfil">
+              </div>
+  
+              <div>
+                <p><strong>Nome:</strong> {{ viewCourse.name }}</p>
+                <p><strong>Nível:</strong> {{ viewCourse.level }}</p>
+              </div>
+  
+          </div>
+  
+          <button class="btn-close" (click)="fecharModal()" style="margin-top: 1rem;">Fechar</button>
+  
+  
+        </div>
+  
+        <!-- Excluir -->
+        <div *ngSwitchCase="'excluir'">
+          <h2 class="title-delete">Confirmar Exclusão</h2>
+          <p>Tem certeza que deseja excluir o curso <strong>{{ viewCourse.name }}</strong>?</p>
+          <button class="btn-delete" (click)="excluirCourse(viewCourse)">Sim, excluir</button>
+          <button class="btn-close" (click)="fecharModal()" style="margin-top: 1rem;">Fechar</button>
+        </div>
+  
+      </ng-container>
+  
+    </div>
+</div>
+  
+  
+  <div class="container">
+      <h2>Gerenciar Cursos</h2>
+      
+      <!-- Barra de pesquisa e botão para criar novo egresso -->
+      <div class="top-bar">
+        <div class="container-search">
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Pesquisar"
+            [(ngModel)]="searchTerm"
+            (input)="filtrarCourse()"
+          />
+  
+          <img src="/assets/icons/search-icon.svg" alt="">
+        </div>
+  
+  
+        <button class="novo-egresso-btn" (click)="criarNovoEgresso()">
+          <img src="/assets/icons/new-stuff.svg" alt="">
+          <span>Novo Egresso</span>
+        </button>
+      </div>
+    
+      <!-- Lista de egressos -->
+      <div class="lista-egressos">
+  
+        <div class="egresso-item" *ngFor="let course of coursePaginados">
+          <span>{{ course.nome }}</span>
+          <div class="egresso-acoes">
+            <button class="btn-acao visualizar" (click)="openModal(course, 'visualizar')">
+              <img src="/assets/icons/view-icon.svg" alt="">
+            </button>
+            <button class="btn-acao editar" (click)="editarEgresso(course)">
+              <img src="/assets/icons/edit-icon.svg" alt="">
+            </button>
+            <button class="btn-acao excluir" (click)="openModal(course, 'excluir')">
+              <img src="/assets/icons/delete-icon.svg" alt="">
+            </button>
+          </div>
+        </div>
+  
+      </div>
+    
+      <!-- Paginação simples -->
+      <div class="paginacao">
+        <button (click)="paginaAnterior()" [disabled]="paginaAtual === 1">
+          &lt;
+        </button>
+        <span>{{ paginaAtual }}</span>
+        <button (click)="proximaPagina()" [disabled]="paginaAtual === totalPaginas">
+          &gt;
+        </button>
+      </div>
+  </div>

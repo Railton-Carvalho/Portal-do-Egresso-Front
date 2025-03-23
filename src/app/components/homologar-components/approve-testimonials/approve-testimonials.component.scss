@@ -1,0 +1,300 @@
+
+.container {
+
+    width: 800px;
+    margin: 0 auto;
+  
+    margin-top: 90px;
+  }
+  
+  h2 {
+    font-size: 2.4rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    gap: 75px;
+    margin-bottom: 0.5rem;
+    padding: 10px 15px;
+    background-color: white;
+    padding: 18px 28px;
+    border-radius: 12px;
+  }
+  
+  .container-search {
+    flex : 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    img {
+      width: 35px;
+      height: 35px;
+    }
+  }
+  
+  .search-input {
+    flex: 1;
+    padding: 0.5rem;
+    font-size: 1.45rem;
+    margin-right: 0.5rem;
+    border-radius: 12px;
+    height: 35px;
+  }
+  
+  .search-input::placeholder {
+    font-size: 1.8rem;
+    padding: 10px;
+  }
+  
+//   .novo-egresso-btn {
+  
+//     display: flex;
+//     align-items: center;
+//     justify-content: space-between;
+//     gap: 8px;
+  
+//     font-size: 2.15rem;
+//     background-color: white;
+//     color: #19CBA0;
+//     border: none;
+//     padding: 0.5rem 1rem;
+//     cursor: pointer;
+//     font-weight: bold;
+//     border-radius: 4px;
+  
+//     height: 50px;
+  
+  
+//     img { 
+//       width: 32px;
+//       height: 32px;
+//     }
+//   }
+  
+  .lista-itens {
+    border-radius: 12px;
+    padding: 28px;
+    background-color: white;
+  
+    height: 360px;
+  
+    overflow: auto;
+  
+  }
+  
+  .lista-itens::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+    background-color: #4040401e;
+  }
+  
+  .lista-itens::-webkit-scrollbar-button {
+    border: 1px solid #ff0000 dashed;
+  }
+  
+  .lista-itens::-webkit-scrollbar-track {
+    background-color: #4040401e;
+  }
+  
+  .lista-itens::-webkit-scrollbar-thumb {
+    background-color: #19CBA0;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .lista-itens::-webkit-scrollbar-corner {
+    background-color: #4040401e;
+    border-radius: 5px;
+  }
+  
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 0.8rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid #272727;
+    border-radius: 12px;
+
+    overflow: hidden;
+  }
+  
+  .item span {
+    font-size: 1.65rem;
+    font-weight: 500;
+
+    width: 60%;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .item-acoes {
+    display: flex;
+    gap: 0.5rem;
+    user-select: none;
+  }
+  
+  .btn-acao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #007bff;
+    border: none;
+    color: #fff;
+    padding: 0.35rem 0.65rem;
+    cursor: pointer;
+    border-radius: 12px;
+  
+    img {
+      width: 25px;
+      height: 25px;
+    }
+  
+  }
+  
+  .btn-acao.aprovar {
+    background: #19CBA0; /* Azul claro */
+  }
+  
+  .btn-acao.visualizar {
+    background: #ffc107; /* Amarelo */
+  }
+  
+  .btn-acao.rejeitar {
+    background: #dc3545; /* Vermelho */
+  }
+  
+  .paginacao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.2rem;
+  }
+  
+  .paginacao button {
+    background: none;
+    color: #272727;
+    font-size: 2.85rem;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    margin: 0 0.5rem;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .paginacao span {
+    font-size: 2.20rem;
+    font-weight: 500;
+
+  }
+  
+  
+  // modal 
+  
+  .backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  
+    z-index: 5; 
+  
+  }
+  .modal {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+  
+
+  
+    .modal-body {
+      width: 100%;
+    }
+  
+    .perfil-img {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: white;
+      border: 6px solid #19CBA0;
+    }
+  
+    img {
+      width: 70%;
+      height: 70%;
+    }
+  
+    h2 {
+      font-size: 2.85rem;
+    }
+  
+    .title-view {
+      color: #007bff;
+    }
+
+    .title-aprovar {
+        color: #19CBA0;
+    }
+  
+    .title-rejeitar {
+      color: #ff0000;
+    }
+  
+    p {
+      font-size: 1.75rem;
+
+      max-width: 660px;
+    }
+  }
+  button {
+    margin-right: 0.5rem;
+  }
+  
+  .view-egresso {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+  
+    gap: 25px;
+  
+    .list-cursos {
+      li {
+        font-size: 1.75rem;
+      }
+    }
+  
+  }
+
+  .btn-modal {
+    font-size: 1.6rem;
+    color: white;
+    border-radius: 12px;
+    width: 120px;
+    height: 40px;
+  }
+
+  .btn-aprovar {
+    background-color: #19CBA0;
+  }
+  
+  .btn-rejeitar {
+    background-color: #ff0000;
+  }
+  
+  .btn-close {
+    background-color: #ffc107;
+    color: black !important;
+  }

@@ -1,0 +1,79 @@
+// Variáveis
+$primary-color: #00939a;
+$primary-hover: #007a80;
+$text-color: #111111;
+$border-color: #d4d4d4;
+$background-color: white;
+$input-padding: 12px;
+$border-radius: 4px;
+
+mat-form-field{
+  height: 20%;
+  margin-bottom: 5px;
+  border-radius: 8px;
+}
+.inputResumo{
+  max-height: 14vh;
+}
+.form-container {
+  padding: 25px;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+
+  .page-title {
+    font-size: 54px;
+    font-weight: bold;
+    color: $text-color;
+    text-align: center;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    background-color: $background-color;
+    border-radius: 8px;
+    padding: 40px;
+    max-width: 800px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+    width: 100%;
+
+    .date-container {
+      display: flex;
+      gap: 20px;
+
+      .date-group {
+        flex: 1;
+      }
+    }
+
+.submit-button {
+      background-color: $primary-color;
+      color: white;
+      border: none;
+      border-radius: 32px;
+      padding: 20px 15px;
+      font-size: 32px;
+      cursor: pointer;
+      width: 100%;
+      max-width: 400px;
+      margin: 0  auto 0;
+      margin-top: 30px;
+
+      &:hover {
+        background-color: $primary-hover;
+      }
+    }
+  }
+}
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+  appearance: textfield; /* Padrão */
+  
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}

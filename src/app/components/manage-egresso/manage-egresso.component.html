@@ -1,0 +1,104 @@
+<div class="backdrop" *ngIf="isOpen">
+  <div class="modal">
+    <ng-container [ngSwitch]="mode">
+
+      <!-- Visualizar -->
+      <div *ngSwitchCase="'visualizar'" class="modal-body">
+        <h2 class="title-view">Visualizar Egresso</h2>
+
+        <div class="view-egresso">
+
+            <div class="perfil-img">
+              <img src="/assets/icons/user-icon.svg" alt="foto de perfil">
+            </div>
+
+            <div>
+              <p><strong>Nome:</strong> {{ viewEgresso.nome }}</p>
+              <p><strong>CPF:</strong> {{ viewEgresso.cpf }}</p>
+              <p><strong>E-mail:</strong> {{ viewEgresso.email }}</p>
+              <p><strong>Resumo:</strong> {{ viewEgresso.resumo }}</p>
+            </div>
+
+            <div class="list-cursos">
+              <p><strong>Cursos:</strong></p>
+              <ul>
+                <li *ngFor="let curso of viewEgresso.egressoCursos">{{curso}}</li>
+              </ul>
+            </div>
+
+        </div>
+
+        <button class="btn-close" (click)="fecharModal()" style="margin-top: 1rem;">Fechar</button>
+
+
+      </div>
+
+      <!-- Excluir -->
+      <div *ngSwitchCase="'excluir'">
+        <h2 class="title-delete">Confirmar Exclusão</h2>
+        <p>Tem certeza que deseja excluir o egresso <strong>{{ viewEgresso.nome }}</strong>?</p>
+        <button class="btn-delete" (click)="excluirEgresso(viewEgresso)">Sim, excluir</button>
+        <button class="btn-close" (click)="fecharModal()" style="margin-top: 1rem;">Fechar</button>
+      </div>
+
+    </ng-container>
+
+  </div>
+</div>
+
+
+<div class="container">
+    <h2>Gerenciar Egressos</h2>
+    
+    <!-- Barra de pesquisa e botão para criar novo egresso -->
+    <div class="top-bar">
+      <div class="container-search">
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Pesquisar"
+          [(ngModel)]="searchTerm"
+          (input)="filtrarEgressos()"
+        />
+
+        <img src="/assets/icons/search-icon.svg" alt="">
+      </div>
+
+
+      <button class="novo-egresso-btn" (click)="criarNovoEgresso()">
+        <img src="/assets/icons/new-stuff.svg" alt="">
+        <span>Novo Egresso</span>
+      </button>
+    </div>
+  
+    <!-- Lista de egressos -->
+    <div class="lista-egressos">
+
+      <div class="egresso-item" *ngFor="let egresso of egressosPaginados">
+        <span>{{ egresso.nome }}</span>
+        <div class="egresso-acoes">
+          <button class="btn-acao visualizar" (click)="openModal(egresso, 'visualizar')">
+            <img src="/assets/icons/view-icon.svg" alt="">
+          </button>
+          <button class="btn-acao editar" (click)="editarEgresso(egresso)">
+            <img src="/assets/icons/edit-icon.svg" alt="">
+          </button>
+          <button class="btn-acao excluir" (click)="openModal(egresso, 'excluir')">
+            <img src="/assets/icons/delete-icon.svg" alt="">
+          </button>
+        </div>
+      </div>
+
+    </div>
+  
+    <!-- Paginação simples -->
+    <div class="paginacao">
+      <button (click)="paginaAnterior()" [disabled]="paginaAtual === 1">
+        &lt;
+      </button>
+      <span>{{ paginaAtual }}</span>
+      <button (click)="proximaPagina()" [disabled]="paginaAtual === totalPaginas">
+        &gt;
+      </button>
+    </div>
+</div>

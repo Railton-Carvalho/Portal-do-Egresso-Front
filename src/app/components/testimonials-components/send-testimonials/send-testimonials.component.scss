@@ -1,0 +1,48 @@
+
+.main-content{
+    display: flex;
+    height: 55vh;
+    padding: 50px;
+    width: 35vw;
+    border-radius: 15px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+mat-label{
+    font-size: 1.4em;
+}
+mat-error{
+    font-size: 1.8em;
+}
+.page-title {
+    font-size: 54px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+}
+.inputDepoimento{
+  width: 35vw;
+  max-height: 80vh;
+}
+
+
+  .submit-button {
+    background-color: #008c99 !important; /* Cor de fundo */
+    color: white !important; /* Cor do texto */
+    border: none;
+    padding: 20px 50px;
+    border-radius: 25px; /* Borda arredondada */
+    font-size: 32px;
+    width: 100%;
+    max-width: 500px;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.submit-button:hover {
+    background-color: #007180 !important; /* Cor de fundo ao passar o mouse */
+}

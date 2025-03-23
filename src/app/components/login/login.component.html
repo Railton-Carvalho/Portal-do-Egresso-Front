@@ -1,0 +1,47 @@
+<div class="login-container">
+
+    <div class="tabs">
+        <button class="tab" [ngClass]="{ 'active-coordenador': typeUser, '' : !typeUser}" (click)="typeUserCoordenador()"  id="coordenador-tab">Coordenador</button>
+        <button class="tab" [ngClass]="{ 'active-engresso': !typeUser, '' : typeUser}" (click)="typeUserEngresso()" id="egresso-tab">Egresso</button>
+    </div>
+
+    <div class="login-content">
+
+        <div class="divider"></div>
+
+        <h1 class="login-title" [ngStyle]="{'color': typeUser ? '#046973' : '#0070f0'}" >Login</h1>
+        
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <span *ngIf="shouldShowError('email')">
+                    <span *ngIf="loginForm.get('email')?.errors?.['required']">Email é obrigatório</span>
+                    <span *ngIf="loginForm.get('email')?.errors?.['email']">Email inválido</span>
+                </span>
+                <label for="email" class="form-label">Seu email</label>
+                <input type="email" id="email" class="form-input" placeholder="usuario@email.com" formControlName="email">
+            </div>
+            
+            <div class="form-group">
+
+                <span *ngIf="shouldShowError('password')">
+                    <span *ngIf="loginForm.get('password')?.errors?.['required']">
+                        Senha é obrigatório
+                    </span>
+                    <span *ngIf="loginForm.get('password')?.errors?.['minlength']">
+                        Mínimo 6 caracteres
+                    </span>
+                </span>
+
+                <label for="password" class="form-label">Sua senha</label>
+                <input type="password" id="password" class="form-input" placeholder="lab1234" formControlName="password">
+            </div>
+            
+            <button class="login-button" [ngClass]="{ 'login-button-coordenador': typeUser, 'login-button-engresso' : !typeUser}" >Entrar</button>
+        </form>
+    </div>
+    
+    <div class="login-footer">
+        <span class="footer-text">Ainda não tem conta?</span>
+        <a href="#" class="register-link">Cadastre-se</a>
+    </div>
+</div>

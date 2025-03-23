@@ -1,0 +1,95 @@
+<div class="form-container">
+    <h1 class="page-title">{{title}} Egresso</h1>
+
+    <form class="form">
+        <!-- Nome Completo -->
+        <mat-form-field class="example-full-width">
+            <mat-label>Nome Completo</mat-label>
+            <input 
+              matInput 
+              placeholder="Digite seu Nome Completo" 
+              [formControl]="fullNameFormControl"
+              required>
+            <mat-error *ngIf="fullNameFormControl.hasError('required')">
+              Nome Completo é <strong>obrigatório</strong>.
+            </mat-error>
+          </mat-form-field>
+        <!-- E-mail -->
+        <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput  [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+                   placeholder="Ex. labprog@example.com">
+            @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+              <mat-error>Por favor digite um email válido</mat-error>
+            }
+            @if (emailFormControl.hasError('required')) {
+              <mat-error>O Email é <strong>obrigatório</strong></mat-error>
+            }
+          </mat-form-field>
+        <div class="date-container">
+          <!-- Senha -->
+          <mat-form-field class="example-full-width">
+              <mat-label>Senha</mat-label>
+              <input matInput placeholder="Digite sua senha"  [formControl]="passwordFormControl" type="password">
+              <mat-error *ngIf="passwordFormControl.hasError('required')">
+                  A senha é <strong>obrigatório</strong>.
+                </mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Cpf</mat-label>
+            <input 
+              matInput 
+              type="number"
+              placeholder="Digite seu CPF" 
+              [formControl]="cpfFormControl"
+              required>
+            <mat-error *ngIf="cpfFormControl.hasError('required')">
+              O CPF é <strong>obrigatório</strong>.
+            </mat-error>
+          </mat-form-field>
+        </div>
+         <!-- Resumo -->
+         <mat-form-field class="inputResumo">
+          <mat-label>Resumo</mat-label>
+          <textarea matInput pla [formControl]=" resumoFromControl"
+          required>></textarea>
+          <mat-error *ngIf="resumoFromControl.hasError('required')">
+              O Resumo é <strong>obrigatório</strong>.
+          </mat-error>
+        </mat-form-field>
+    <div class="date-container">
+        <!-- Curso -->
+        <mat-form-field>
+            <mat-label>Curso</mat-label>
+            <mat-select [formControl]="resumoFromControl">
+                <mat-option *ngFor="let course of courseList; let i = index" [value]="course">
+                    {{ (i+1) +' '+ course }}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="resumoFromControl.hasError('required')">
+              O Curso é <strong>obrigatório</strong>.
+          </mat-error>
+        </mat-form-field>
+            <!-- Ano de Início -->
+            <mat-form-field>
+                <mat-label>Data de Início*</mat-label>
+                <input matInput [matDatepicker]="picker2">
+                <mat-hint>DD/MM/AAAA</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+              
+              <!-- Ano de Término -->
+              <mat-form-field>
+                <mat-label>Data de Término*</mat-label>
+                <input matInput [matDatepicker]="picker">
+                <mat-hint>DD/MM/AAAA</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+        </div>
+        <!-- Botão de Cadastro -->
+        <button mat-raised-button color="primary" type="submit" class="submit-button" (click)="onSubmit()">{{title}}</button>
+    </form>
+</div>
+

@@ -1,0 +1,11 @@
+<div class="sidebar">
+  <div class="logo">
+      <div class="logo-text">
+          <span class="logo-portal">Portal</span><br>
+          <span class="logo-egresso">Egresso</span>
+      </div>
+  </div>
+  <ul class="nav-menu">
+      <li *ngFor="let item of menuItems" (click)="onSelected(item)" class="nav-item">{{ item.option }}</li>
+  </ul>
+</div>

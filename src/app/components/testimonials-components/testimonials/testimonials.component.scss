@@ -1,0 +1,112 @@
+
+.testimonials-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+
+    overflow: hidden;
+
+    margin-top: 70px;
+
+  }
+  
+  .testimonials-section h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 4rem;
+    color: #333;
+  }
+
+  .container-testimonial {
+
+    height: 500px;
+
+    overflow: auto;
+    padding: 0px 90px;
+
+  }
+
+  .container-testimonial::-webkit-scrollbar {
+      width: 12px;
+      height: 12px;
+      background-color: #4040401e;
+  }
+
+  .container-testimonial::-webkit-scrollbar-button {
+      border: 1px solid #ff0000 dashed;
+  }
+
+  .container-testimonial::-webkit-scrollbar-track {
+      background-color: #4040401e;
+  }
+
+  .container-testimonial::-webkit-scrollbar-thumb {
+      background-color: #19CBA0;
+      border-radius: 5px;
+      cursor: pointer;
+  }
+
+  .container-testimonial::-webkit-scrollbar-corner {
+      background-color: #4040401e;
+      border-radius: 5px;
+  }
+  
+
+  .testimonial-item {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    display: flex;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    align-items: flex-start;
+  }
+  
+  .user-icon {
+    min-width: 60px;
+    min-height: 60px;
+    border-radius: 50%;
+    background: #4FC3A1;
+    background-image: url('https://via.placeholder.com/60');
+    background-position: center;
+    background-size: cover;
+    margin-right: 1rem;
+  }
+  
+  .testimonial-content {
+    flex: 1;
+    overflow: hidden;
+  }
+  
+  .testimonial-content h2 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+  
+  .testimonial-content p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+  }
+  
+  .toggle-text {
+    display: inline-block;
+    margin-top: 0.5rem;
+    color: #4FC3A1;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .toggle-text:hover {
+    text-decoration: underline;
+  }
+
+
+  .shortText {
+    white-space: nowrap;        /* Impede o texto de quebrar a linha */
+    overflow: hidden;           /* Oculta o texto que ultrapassa o limite do contêiner */
+    text-overflow: ellipsis;    /* Exibe "..." no final do texto que não cabe */
+  }

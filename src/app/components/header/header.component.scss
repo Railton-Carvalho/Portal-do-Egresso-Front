@@ -1,0 +1,40 @@
+
+body{
+    overflow: hidden;
+}
+
+.header {
+    background-color: #ffffff;
+    padding: 8px 30px;
+    border-radius: 15px;
+    width: 70vw;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+
+    position: fixed; /* Fixa o elemento na tela */
+    top: 0; /* Cola no topo */
+    left: 60%; 
+    transform: translateX(-50%); 
+    z-index: 2; 
+}
+
+.user-type{
+    font-size: 40px;
+    font-weight: bold;
+    color: var(--green-leaf);
+    font-weight: 500;
+}
+
+img{
+    height: 40px;
+    cursor: pointer;
+}
+
+span{
+    display: flex;
+    gap: 28px;
+}
+  

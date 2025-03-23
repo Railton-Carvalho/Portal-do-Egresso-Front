@@ -1,0 +1,26 @@
+<h1 class="page-title">Enviar Oportunidade</h1>
+<div class="main-content">
+    <mat-form-field class="example-full-width">
+        <mat-label>Título</mat-label>
+        <input 
+          matInput 
+          placeholder="Digite o Título" 
+          [formControl]=" titleFormControl"
+          required>
+        <mat-error *ngIf="titleFormControl.hasError('required')">
+          O título é <strong>obrigatório</strong>.
+        </mat-error>
+      </mat-form-field>
+    <mat-form-field class="inputDepoimento">
+        <mat-label>Descrição</mat-label>
+        <textarea matInput pla [formControl]=" titleFormControl"
+        required>></textarea>
+        <mat-error *ngIf="testimonialsFormControl.hasError('required')">
+            A Descrição é <strong>obrigatório</strong>. 
+        </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" class="submit-button">
+        Enviar
+    </button>
+
+</div>

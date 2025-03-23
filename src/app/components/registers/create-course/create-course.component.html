@@ -1,0 +1,39 @@
+<div class="container">
+    <h1 class="page-title">{{title}} Curso</h1>
+    
+    <div class="form-container">
+        <form>
+            <div class="form-group">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Nome Completo</mat-label>
+                    <input 
+                      matInput 
+                      placeholder="Digite seu Nome Completo" 
+                      [formControl]="nameFormControl"
+                      required>
+                    <mat-error *ngIf="nameFormControl.hasError('required')">
+                      O nome é <strong>obrigatório</strong>.
+                    </mat-error>
+                  </mat-form-field>
+            </div>
+            
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Curso</mat-label>
+                    <mat-select [formControl]="levelFormControl">
+                        <mat-option *ngFor="let levels of levelsList; let i = index" [value]="levels">
+                            {{ (i+1) +' '+ levels }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="levelFormControl.hasError('required')">
+                      O Curso é <strong>obrigatório</strong>.
+                  </mat-error>
+                </mat-form-field>
+            </div>
+            
+            <div class="btn-container">
+                <button type="submit">Cadastrar</button>
+            </div>
+        </form>
+    </div>
+</div>

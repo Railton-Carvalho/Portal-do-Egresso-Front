@@ -1,0 +1,101 @@
+<div class="backdrop" *ngIf="isOpen">
+    <div class="modal">
+      <ng-container [ngSwitch]="mode">
+  
+        <!-- Visualizar -->
+        <div *ngSwitchCase="'visualizar'" class="modal-body">
+          <h2 class="title-view">Visualizar Depoimento</h2>
+  
+          <div class="view-egresso">
+  
+              <div class="perfil-img">
+                <img src="/assets/dashboard/testimoals.svg" alt="foto de perfil">
+              </div>
+  
+              <div>
+                <p><strong>Descrição:</strong> {{ viewTestimonial.content }}</p>
+              </div>
+  
+              <!-- <div class="list-cursos">
+                <p><strong>Cursos:</strong></p>
+                <ul>
+                  <li *ngFor="let curso of viewTestimonial.egressoCursos">{{curso}}</li>
+                </ul>
+              </div> -->
+  
+          </div>
+  
+          <button class="btn-modal btn-close" (click)="fecharModal()" style="margin-top: 1rem;">Fechar</button>
+  
+  
+        </div>
+  
+        <div *ngSwitchCase="'aprovar'">
+            <h2 class="title-aprovar">Confirmar Aprovação</h2>
+            <p>Tem certeza de que deseja aprovar este depoimento?</p>
+            <button class="btn-modal btn-aprovar" (click)="aprovarEgresso(viewTestimonial)">Sim, aprovar</button>
+            <button class="btn-modal btn-close" (click)="fecharModal()" style="margin-top: 1rem;">Fechar</button>
+        </div>
+
+        <div *ngSwitchCase="'rejeitar'">
+          <h2 class="title-rejeitar">Confirmar Rejeição</h2>
+          <p>Tem certeza de que deseja rejeitar este depoimento?</p>
+          <button class="btn-modal btn-rejeitar" (click)="rejeitarEgresso(viewTestimonial)">Sim, rejeitar</button>
+          <button class="btn-modal btn-close" (click)="fecharModal()" style="margin-top: 1rem;">Fechar</button>
+        </div>
+  
+      </ng-container>
+  
+    </div>
+  </div>
+  
+  
+<div class="container">
+      <h2>Homologar Depoimentos</h2>
+      
+      <!-- Barra de pesquis a e botão para criar novo egresso -->
+      <div class="top-bar">
+        <div class="container-search">
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Pesquisar"
+            [(ngModel)]="searchTerm"
+            (input)="filtrarEgressos()"
+          />
+  
+          <img src="/assets/icons/search-icon.svg" alt="">
+        </div>
+
+      </div>
+    
+      <div class="lista-itens">
+  
+        <div class="item" *ngFor="let testimonials of testimonialsPaginados">
+          <span>{{ testimonials.content }}</span>
+          <div class="item-acoes">
+            <button class="btn-acao visualizar" (click)="openModal(testimonials, 'visualizar')">
+              <img src="/assets/icons/view-icon.svg" alt="">
+            </button>
+            <button class="btn-acao aprovar" (click)="openModal(testimonials, 'aprovar')">
+              <img src="/assets/icons/approve-icon.svg" alt="">
+            </button>
+            <button class="btn-acao rejeitar" (click)="openModal(testimonials, 'rejeitar')">
+              <img src="/assets/icons/reject-icon.svg" alt="">
+            </button>
+          </div>
+        </div>
+  
+      </div>
+    
+      <!-- Paginação simples -->
+      <div class="paginacao">
+        <button (click)="paginaAnterior()" [disabled]="paginaAtual === 1">
+          &lt;
+        </button>
+        <span>{{ paginaAtual }}</span>
+        <button (click)="proximaPagina()" [disabled]="paginaAtual === totalPaginas">
+          &gt;
+        </button>
+      </div>
+</div>
