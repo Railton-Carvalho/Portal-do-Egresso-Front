@@ -1,1 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'colors.scss';
+
+@import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&display=swap');
+
+$green-leaf: #19CBA0;
+$blue-middle: #0070F0;
+$font-dongle: 'Dongle', sans-serif;
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: $font-dongle;
+
+    overflow: hidden;
+  
+}
+
+.painel-div{
+    overflow: hidden;
+    height: 100vh;
+
+}
+
+html, body { height: 100%; }
+body { 
+    margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+

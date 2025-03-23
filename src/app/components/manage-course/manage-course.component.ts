@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ICourse } from '../../interfaces/course.interface';
-// import { ManageCourseService } from '../../services/manage-egresso.service';
+import { ManageCourseService } from '../../services/manage-course.service';
 import { CourseService } from '../../services/course.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { CourseService } from '../../services/course.service';
   styleUrl: './manage-course.component.scss'
 })
 export class ManageCourseComponent {
-  constructor(/*private manageCourseervice: Managecourseervice,*/ private courseService: CourseService) {}
+  constructor(private manageCourseService: ManageCourseService, private courseService: CourseService) {}
 
 
   courseFiltrados: any[] = [];
@@ -143,16 +143,16 @@ export class ManageCourseComponent {
     }
   }
 
-  // criarNovoEgresso() {
+  criarNovoCourse() {
 
-  //   this.managecourseervice.emitirEgresso({operation: true})
-  // }
+    this.manageCourseService.emitirCourse({operation: true})
+  }
 
-  // editarEgresso(egresso: IEgresso) {
+  editarCourse(course: ICourse) {
 
-  //   this.managecourseervice.emitirEgresso({operation: false, egresso: egresso})
+    this.manageCourseService.emitirCourse({operation: false, course: course})
 
-  // }
+  }
 
   fecharModal(){
     this.isOpen = false;
