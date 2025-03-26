@@ -9,10 +9,10 @@
             </div>
 
             <div class="profile-info">
-                <h1 class="profile-name">Nome e Sobrenome</h1>
+                <h1 class="profile-name">{{egresso.nome}}</h1>
                 <div class="profile-education">
-                    <div>Ciência da Computação - Graduação (2014 - 2018)</div>
-                    <div>Ciência da Computação - Mestrado (2019 - 2021)</div>
+                    <div *ngFor="let curso of cursos">{{curso.nome}} - {{curso.nivel}}</div>
+                    
                 </div>
                 <div class="profile-actions">
                     <button class="cv-button">Currículo</button>
@@ -34,27 +34,20 @@
         </div>
 
         <p class="profile-bio">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim libero ipsum, sit amet placerat orci suscipit sed. In ex nisi, sagittis ac odio non, fermentum ultricies mauris.
+            {{egresso.resumo}}
         </p>
 
         <h2 class="section-title">Histórico de Cargos</h2>
 
-        <div class="job-card">
-            <h3 class="job-title">Analista de Dados</h3>
-            <div class="job-company">Uber</div>
-            <div class="job-period">2016 - Atual</div>
-            <p class="job-description">
+        <div class="job-card" *ngFor="let cargo of cargos">
+            <h3 class="job-title">{{cargo.descricao}}</h3>
+            <div class="job-company">{{cargo.local}}</div>
+            <div class="job-period">{{cargo.ano_inicio}} - {{cargo.ano_fim}}</div>
+            <!-- <p class="job-description">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim libero ipsum, sit amet placerat orci suscipit sed.
-            </p>
+            </p> -->
         </div>
 
-        <div class="job-card">
-            <h3 class="job-title">Desenvolvedor Backend</h3>
-            <div class="job-company">Google</div>
-            <div class="job-period">2013 - 2016</div>
-            <p class="job-description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim libero ipsum, sit amet placerat orci suscipit sed.
-            </p>
-        </div>
+     
     </div>
 </div>
