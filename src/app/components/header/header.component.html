@@ -1,7 +1,11 @@
 <div class="header">
     <div class="user-type">Bem Vindo</div>
-    <span>
+    <span *ngIf="isAuth">
         <img src="assets/icons/home-icon.svg" class="home-icon" (click)="onHomeBtnClicked()">
         <img src="assets/icons/exit-icon.svg" class="exit-icon" (click)="onExitBtnClicked()">
     </span>
+
+    <div *ngIf="!isAuth">
+        <button routerLink="/login" class="btn-login">Login</button>
+    </div>
   </div>

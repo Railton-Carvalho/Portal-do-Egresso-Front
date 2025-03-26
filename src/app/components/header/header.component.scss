@@ -28,6 +28,21 @@ body{
     font-weight: 500;
 }
 
+.btn-login {
+    font-size: 1.8rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: var(--gray-light);
+    padding: 0px;
+    background-color: var(--green-leaf);
+    width: 100px;
+    padding: 0px 12px;
+    text-align: center;
+    border: 1px solid rgb(38, 167, 158);
+    border-radius: 12px;
+    cursor: pointer;
+}
+
 img{
     height: 40px;
     cursor: pointer;
