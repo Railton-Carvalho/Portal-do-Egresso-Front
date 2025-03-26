@@ -1,8 +1,9 @@
 export interface ICourse  {
     id: number
-    name: string
-    level: string
-    createdAt: string
-    updatedAt: string
+    nome: string
+    nivel: string
+    oportunidades: any[]
+    createdAt?: string
+    updatedAt?: string
   }
   

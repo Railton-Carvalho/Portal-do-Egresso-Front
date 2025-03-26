@@ -1,8 +1,7 @@
 export interface IOportunity {
     id: number;
-    title: string;
-    testimonials: string;
-    status: string; 
+    titulo: string;
+    descricao: string;
     createdAt: string; 
     updatedAt: string; 
   }

@@ -1,6 +1,6 @@
 export interface ITestimonial {
     id: number;
-    content: string;
+    texto: string;
     createdAt: string; 
     updatedAt: string; 
   }

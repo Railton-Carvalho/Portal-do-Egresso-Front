@@ -8,10 +8,34 @@ export interface IEgresso {
     cpf: string
     resumo: string
     url_foto: string
-    egressoCursos: any[]
+    oportunidadesEnviadas: string[]
     createdAt: string
     updatedAt: string
-    homologado: boolean
-    links: any[]
+    homologadoStatus: string
+    accountNonExpired: boolean
+    credentialsNonExpired: boolean
+    accountNonLocked: boolean
+    password: string
+    authorities: any[]
+    username: string
+    enabled: boolean
+    _links: any
+
+}
+
+export interface IEgressoCreate {
+
+    nome: string,
+    cpf: string,
+    email: string,
+    status: string,
+    senha: string | null,
+    resumo: string,
+    homologado: string,
+    idCurso: number,
+    Ano_inicio: number,
+    Ano_fim: number,
+    ano_inicio: number,
+    ano_fim: number, 
 
 }
