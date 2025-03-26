@@ -4,8 +4,9 @@ import { ManageEgressoComponent } from '../manage-egresso/manage-egresso.compone
 import { ApproveTestimonialsComponent } from '../homologar-components/approve-testimonials/approve-testimonials.component';
 import { ApproveOportunityComponent } from '../homologar-components/approve-oportunity/approve-oportunity.component';
 import { ApproveEgressoComponent } from '../homologar-components/approve-egresso/approve-egresso.component';
-import { ManageEgressoService } from '../../services/manage-egresso.service';
 import { ManageCourseComponent } from '../manage-course/manage-course.component';
+import { AutenticationService } from '../../services/autentication.service';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -15,21 +16,40 @@ import { ManageCourseComponent } from '../manage-course/manage-course.component'
 })
 export class DashboardComponent {
 
-  constructor(private manageEgressoService: ManageEgressoService){}
+  constructor(private authService: AutenticationService){}
 
-  cards = [
-    { title: 'Gerenciar Egressos', icon: 'student-cap.svg', component: ManageEgressoComponent},
-    { title: 'Gerenciar Cursos', icon: 'couse-icon.svg', component: ManageCourseComponent  },
-    { title: 'Homologar Depoimentos', icon: 'testimoals.svg', component: ApproveTestimonialsComponent  },
-    { title: 'Homologar Oportunidades', icon: 'oportunity.svg', component: ApproveOportunityComponent},
-    { title: 'Homologar Cadastros', icon: 'registrer-icon.svg', component: ApproveEgressoComponent }
-  ];
+  cards: any [] = []
 
-  @Output() optionSelected = new EventEmitter<Type<any>>();
   
-  onSelected(item: Type<any>) {
-    //this.optionSelected.emit(item);
+  ngOnInit(){
 
-    this.manageEgressoService.emitirEgresso({op: 'dashboard', item: item})
+
+    let role = this.authService.getRole();
+
+    let id = this.authService.getId() ?? -1;
+
+    if(role === 'coordenador'){
+      
+      this.cards = [
+        { title: 'Gerenciar Egressos', icon: 'student-cap.svg', rota: '/gerenciar_egresso'},
+        { title: 'Gerenciar Cursos', icon: 'couse-icon.svg', rota: '/gerenciar_curso'  },
+        { title: 'Homologar Depoimentos', icon: 'testimoals.svg', rota: '/homologar_depoimentos'  },
+        { title: 'Homologar Oportunidades', icon: 'oportunity.svg', rota: '/homologar_oportunidades'},
+        { title: 'Homologar Cadastros', icon: 'registrer-icon.svg', rota: '/homologar_cadastros' }
+      ];
+
+    }else if(role === 'egresso'){
+
+      this.cards = [
+        { title: 'Gerenciar Depoimentos', icon: 'testimoals.svg', rota: '/gerenciar_depoimentos'},
+        { title: 'Gerenciar Oportunidades', icon: 'oportunity.svg', rota: '/gerenciar_oportunidades'  },
+        { title: 'Atualizar Dados', icon: 'student-cap.svg', rota: '/atualizar_egresso/id/'+id },
+      ];
+
+    }
+
+
   }
+  
+
 }
