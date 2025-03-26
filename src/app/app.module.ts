@@ -11,10 +11,9 @@ import { AngularMaterialModule } from './angular-material/angular-material.modul
 import { MY_DATE_FORMATS, RegisterEgressoComponent } from './components/registers/register-egresso/register-egresso.component';
 import { TestimonialsComponent } from './components/testimonials-components/testimonials/testimonials.component';
 import { ManageEgressoComponent } from './components/manage-egresso/manage-egresso.component';
-import { ReportsComponent } from './components/reports/reports.component';
 import { SimplePieComponent } from './components/reports/reports-elements/simple-pie/simple-pie.component';
 import { ReportsModule } from './components/reports/reports.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SendTestimonialsComponent } from './components/testimonials-components/send-testimonials/send-testimonials.component';
 import { CreateOportunityComponent } from './components/oportunity-components/create-oportunity/create-oportunity.component';
 import { EgressoProfileComponent } from './components/egresso-profile/egresso-profile.component';
@@ -24,6 +23,12 @@ import { ApproveOportunityComponent } from './components/homologar-components/ap
 import { ApproveTestimonialsComponent } from './components/homologar-components/approve-testimonials/approve-testimonials.component';
 import { CreateCourseComponent } from './components/registers/create-course/create-course.component';
 import { ManageCourseComponent } from './components/manage-course/manage-course.component';
+import { MainLayoutComponent } from './components/layout/main-layout/main-layout.component';
+import { EgressoComponentsComponent } from './components/egresso-components/egresso-components.component';
+import { TokenInterceptor } from './interceptors/token.interceptor';
+import { OportunityComponent } from './components/oportunity-components/oportunity/oportunity.component';
+import { ManageOportunityComponent } from './components/manage-oportunity/manage-oportunity.component';
+import { ManageTestimoalsComponent } from './components/manage-testimoals/manage-testimoals.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +48,11 @@ import { ManageCourseComponent } from './components/manage-course/manage-course.
     ApproveTestimonialsComponent,
     CreateCourseComponent,
     ManageCourseComponent,
+    MainLayoutComponent,
+    EgressoComponentsComponent,
+    OportunityComponent,
+    ManageOportunityComponent,
+    ManageTestimoalsComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +63,7 @@ import { ManageCourseComponent } from './components/manage-course/manage-course.
 
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
   ],

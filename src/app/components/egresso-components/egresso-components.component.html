@@ -1,0 +1,29 @@
+<section class="egressos-section">
+    <h1>Egressos</h1>
+  
+    <div class="container-egresso">
+
+      <div class="egresso-item" *ngFor="let d of egressos">
+        <div class="user-icon"></div>
+        <div class="egresso-content">
+
+          <div class="info">
+              <h2>{{ d.nome }} </h2>
+              <p>{{d.email}}</p>
+              <p>{{d.cpf}} </p>
+          </div>
+
+          <div class="text">
+              <p class="full-text shortText">
+                {{ d.resumo }}
+              </p>
+              <!-- <div class="ellipsis"><div></div> <div></div> <div></div></div> -->
+              <a href="#" class="toggle-text" (click)="toggleText(d, $event)">Ver mais</a>
+          </div>
+
+        </div>
+      </div>
+      
+    </div>
+
+  </section>

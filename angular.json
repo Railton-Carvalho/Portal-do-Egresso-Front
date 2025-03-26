@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Portal-Egresso": {
+    "Portal_Egresso": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Portal-Egresso:build:production"
+              "buildTarget": "Portal_Egresso:build:production"
             },
             "development": {
-              "buildTarget": "Portal-Egresso:build:development"
+              "buildTarget": "Portal_Egresso:build:development"
             }
           },
           "defaultConfiguration": "development"

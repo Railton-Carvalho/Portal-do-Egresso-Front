@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+
+   apiportalegresso:
+    image: railtonr/mux-egresso-api:v1
+    container_name: portal-regresso-api
+    ports:
+      - "8089:8089"
+    networks:
+      - default
+
+   frontendportalegresso:
+    build: .
+    image: portal_egresso_angular:latest     
+    container_name: portal-egresso-angular
+
+    ports:
+      - "4200:80"
+
+    networks:
+      - default
+ 

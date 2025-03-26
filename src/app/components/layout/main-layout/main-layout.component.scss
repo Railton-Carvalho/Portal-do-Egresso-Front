@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.left-container {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* Organiza as divs filhas verticalmente */
+}
+
+.top-div {
+    flex-grow: 1;
+
+    /* Preenche todo o espaço disponível */
+}
+
+.main-left-div {
+    height: 80%;
+    /* Ocupa 80% da altura do seu contêiner pai */
+}
+
+.painel-div {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    background-color: #e3f2fd;;
+    align-items: center;
+    gap: 15px;
+    justify-content: center;
+    max-height: 100vh;
+}
+
+

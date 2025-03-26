@@ -1,0 +1,105 @@
+<div class="backdrop" *ngIf="isOpen">
+    <div class="modal">
+      <ng-container [ngSwitch]="mode">
+  
+        <!-- Visualizar -->
+        <div *ngSwitchCase="'visualizar'" class="modal-body">
+          <h2 class="title-view">Visualizar Depoimento</h2>
+  
+          <div class="view-egresso">
+  
+              <!-- <div class="perfil-img">
+                <img src="/assets/icons/user-icon.svg" alt="foto de perfil">
+              </div> -->
+  
+              <div>
+                <p><strong>Depoimento:</strong> {{ viewTestimoal.texto }}</p>
+     
+              </div>
+  
+              <!-- <div class="list-cursos">
+                <p><strong>Cursos:</strong></p>
+                <ul>
+                  <li *ngFor="let curso of viewTestimoal.egressoCursos">{{curso}}</li>
+                </ul>
+              </div> -->
+  
+          </div>
+  
+          <button class="btn-close" (click)="fecharModal()" style="margin-top: 1rem;">Fechar</button>
+  
+  
+        </div>
+  
+        <!-- Excluir -->
+        <div *ngSwitchCase="'excluir'">
+          <h2 class="title-delete">Confirmar Exclusão</h2>
+          <p>Tem certeza que deseja excluir o depoimento <strong>{{ viewTestimoal.texto }}</strong>?</p>
+          <button class="btn-delete" (click)="excluirOportunity(viewTestimoal)">Sim, excluir</button>
+          <button class="btn-close" (click)="fecharModal()" style="margin-top: 1rem;">Fechar</button>
+        </div>
+  
+      </ng-container>
+  
+    </div>
+  </div>
+  
+  
+  <div class="container">
+      <h2>Seus Depoimentos</h2>
+      
+      <!-- Barra de pesquisa e botão para criar novo egresso -->
+      <div class="top-bar">
+        <div class="container-search">
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Pesquisar"
+            [(ngModel)]="searchTerm"
+            (input)="verificarCampo($event)"
+          />
+
+          <!-- (input)="filtrarEgressos()" -->
+
+          
+          <img src="/assets/icons/search-icon.svg" alt="" (click)="buscarDepoimento()">
+        </div>
+  
+  
+        <button class="novo-egresso-btn" (click)="criarNovoEgresso()">
+          <img src="/assets/icons/new-stuff.svg" alt="">
+          <span>Nova Depoimento</span>
+        </button>
+      </div>
+    
+      <!-- Lista de egressos -->
+      <div class="lista-egressos">
+  
+        <div class="egresso-item" *ngFor="let testimoal of testimoals">
+          <span>{{ testimoal.texto }}</span>
+          <div class="egresso-acoes">
+            <div>
+                
+            </div>
+            <button class="btn-acao visualizar" (click)="openModal(testimoal, 'visualizar')">
+              <img src="/assets/icons/view-icon.svg" alt="">
+            </button>
+            <button class="btn-acao excluir" (click)="openModal(testimoal, 'excluir')">
+              <img src="/assets/icons/delete-icon.svg" alt="">
+            </button>
+          </div>
+        </div>
+  
+      </div>
+    
+      <!-- Paginação simples -->
+      <div class="paginacao">
+        <button (click)="paginaAnterior()" [disabled]="paginaAtual === 1">
+          &lt;
+        </button>
+        <span>{{ paginaAtual }}</span>
+        <button (click)="proximaPagina()" [disabled]="paginaAtual === totalPaginas">
+          &gt;
+        </button>
+      </div>
+  </div>
