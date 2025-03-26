@@ -49,14 +49,14 @@
             class="search-input"
             placeholder="Pesquisar"
             [(ngModel)]="searchTerm"
-            (input)="filtrarCourse()"
-          />
+            (input)="verificarCampo($event)"
+            />
   
-          <img src="/assets/icons/search-icon.svg" alt="">
+          <img src="/assets/icons/search-icon.svg" alt="" (click)="buscarCurso()">
         </div>
   
   
-        <button class="novo-egresso-btn" (click)="criarNovoEgresso()">
+        <button class="novo-egresso-btn" (click)="criarNovoCourse()">
           <img src="/assets/icons/new-stuff.svg" alt="">
           <span>Novo Egresso</span>
         </button>
@@ -65,13 +65,13 @@
       <!-- Lista de egressos -->
       <div class="lista-egressos">
   
-        <div class="egresso-item" *ngFor="let course of coursePaginados">
+        <div class="egresso-item" *ngFor="let course of courses">
           <span>{{ course.nome }}</span>
           <div class="egresso-acoes">
-            <button class="btn-acao visualizar" (click)="openModal(course, 'visualizar')">
+            <!-- <button class="btn-acao visualizar" (click)="openModal(course, 'visualizar')">
               <img src="/assets/icons/view-icon.svg" alt="">
-            </button>
-            <button class="btn-acao editar" (click)="editarEgresso(course)">
+            </button> -->
+            <button class="btn-acao editar" (click)="editarCourse(course)">
               <img src="/assets/icons/edit-icon.svg" alt="">
             </button>
             <button class="btn-acao excluir" (click)="openModal(course, 'excluir')">
