@@ -1,7 +1,8 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { IEgresso } from '../../interfaces/egresso.interface';
-import { ManageEgressoService } from '../../services/manage-egresso.service';
 import { EgressoService } from '../../services/egresso.service';
+import { Router } from '@angular/router';
+import { CourseService } from '../../services/course.service';
 
 @Component({
   selector: 'app-manage-egresso',
@@ -11,167 +12,107 @@ import { EgressoService } from '../../services/egresso.service';
 })
 export class ManageEgressoComponent {
 
-  constructor(private manageEgressoService: ManageEgressoService, private egressoService: EgressoService) {}
-
-  @Output('onEgresso') onEgressoEmitt = new EventEmitter<any>();
+  constructor(private egressoService: EgressoService, private router: Router, private courseService: CourseService) {}
 
   egressosFiltrados: any[] = [];
   searchTerm: string = '';
   paginaAtual: number = 1;
   itensPorPagina: number = 6;
-  totalPaginas: number = 4;
+  totalPaginas: number = 0;
   egressosPaginados: any[] = [];
 
-  egressos: IEgresso[]  =  [
-      {
-        "id": 1,
-        "nome": "Carlos Alberto",
-        "senha": "senha12345",
-        "userStatus": "ACTIVE",
-        "email": "carlos.alberto@example.com",
-        "cpf": "12345678901",
-        "resumo": "Resumo do egresso Carlos.",
-        "url_foto": "http://example.com/foto1.jpg",
-        "egressoCursos": [
-          'Ciência da Computação',
-          'Curso 2',
-          'Ciência da Computação 456',
-          'Curso 4',
-          'Curso 5',
-        ],
-        "createdAt": "2025-03-11T22:21:23.741944",
-        "updatedAt": "2025-03-11T22:21:23.741944",
-        "homologado": false,
-        "links": []
-      },
-      {
-          "id": 1,
-          "nome": "Carlos Alberto",
-          "senha": "senha12345",
-          "userStatus": "ACTIVE",
-          "email": "carlos.alberto@example.com",
-          "cpf": "12345678901",
-          "resumo": "Resumo do egresso Carlos.",
-          "url_foto": "http://example.com/foto1.jpg",
-          "egressoCursos": [],
-          "createdAt": "2025-03-11T22:21:23.741944",
-          "updatedAt": "2025-03-11T22:21:23.741944",
-          "homologado": false,
-          "links": []
-    },
-    {
-        id: 1,
-        nome: "Carlos Alberto",
-        senha: "senha12345",
-        userStatus: "ACTIVE",
-        email: "carlos.alberto@example.com",
-        cpf: "12345678901",
-        resumo: "Resumo do egresso Carlos.",
-        url_foto: "http://example.com/foto1.jpg",
-        egressoCursos: [],
-        createdAt: "2025-03-11T22:21:23.741944",
-        updatedAt: "2025-03-11T22:21:23.741944",
-        homologado: false,
-        links: []
-    },
-    {
-        id: 1,
-        nome: "CSALLES ROBERTO",
-        senha: "senha12345",
-        userStatus: "ACTIVE",
-        email: "carlos.alberto@example.com",
-        cpf: "12345678901",
-        resumo: "Resumo do egresso Carlos.",
-        url_foto: "http://example.com/foto1.jpg",
-        egressoCursos: [],
-        createdAt: "2025-03-11T22:21:23.741944",
-        updatedAt: "2025-03-11T22:21:23.741944",
-        homologado: false,
-        links: []
-    }
-    ,
-    {
-        id: 1,
-        nome: "Franscico Paula Roberto",
-        senha: "senha12345",
-        userStatus: "ACTIVE",
-        email: "carlos.alberto@example.com",
-        cpf: "12345678901",
-        resumo: "Resumo do egresso Carlos.",
-        url_foto: "http://example.com/foto1.jpg",
-        egressoCursos: [],
-        createdAt: "2025-03-11T22:21:23.741944",
-        updatedAt: "2025-03-11T22:21:23.741944",
-        homologado: false,
-        links: []
-    }
-    ,
-    {
-        id: 1,
-        nome: "Carlos Alberto",
-        senha: "senha12345",
-        userStatus: "ACTIVE",
-        email: "carlos.alberto@example.com",
-        cpf: "12345678901",
-        resumo: "Resumo do egresso Carlos.",
-        url_foto: "http://example.com/foto1.jpg",
-        egressoCursos: [],
-        createdAt: "2025-03-11T22:21:23.741944",
-        updatedAt: "2025-03-11T22:21:23.741944",
-        homologado: false,
-        links: []
-    }
-    ,
-    {
-        id: 1,
-        nome: "Carlos Alberto",
-        senha: "senha12345",
-        userStatus: "ACTIVE",
-        email: "carlos.alberto@example.com",
-        cpf: "12345678901",
-        resumo: "Resumo do egresso Carlos.",
-        url_foto: "http://example.com/foto1.jpg",
-        egressoCursos: [],
-        createdAt: "2025-03-11T22:21:23.741944",
-        updatedAt: "2025-03-11T22:21:23.741944",
-        homologado: false,
-        links: []
-    }
-  ]
+  egressos: IEgresso[]  =  []
 
   // modal 
 
   isOpen = false;
   mode: 'visualizar' | 'excluir' = 'visualizar';
-  viewEgresso: IEgresso = {} as IEgresso;
+  viewEgresso: any = {} as any;
+  viewCurso: any = {} as any;
+
+  cursosEgressos: any[] = [];
 
   ngOnInit(): void {
-    this.filtrarEgressos();
+
+    this.getEgressos();
+
   }
 
-  filtrarEgressos() {
-    if (this.searchTerm.trim() === '') {
-      this.egressosFiltrados = this.egressos;
-    } else {
-      const termo = this.searchTerm.toLowerCase();
-      this.egressosFiltrados = this.egressos.filter((e) =>
-        e.nome.toLowerCase().includes(termo)
-      );
+
+  getEgressos(){
+
+    this.egressoService.recuperarEgressos(this.paginaAtual -1, this.itensPorPagina).subscribe(
+      {
+        next: (response) => {
+
+          this.egressos = response.content;
+
+          this.totalPaginas = response.totalPages;
+        
+          console.log(response)
+
+          this.egressos.forEach(element => {
+            
+            this.egressoService.recuperarCurso(element.id).subscribe(
+              {
+                next: (response) => {
+
+                  this.cursosEgressos.push(response.content)
+
+                },complete: () =>{
+                  console.log(this.cursosEgressos)
+                }
+              },
+            )
+
+          });
+
+
+
+        },
+        error: (error) => {
+          console.error(error);
+        },
+        complete: () => {
+
+        }
+      }
+    )
+
+  }
+
+  verificarCampo(event: Event) {
+    const valor = (event.target as HTMLInputElement).value;
+    if (valor.trim() === '') {
+      this.buscarEgresso();
+    }
+  }
+
+  buscarEgresso(){
+
+    console.log(this.searchTerm);
+
+    this.paginaAtual = 1
+
+    if(this.searchTerm == ''){
+      this.getEgressos();
+      return
     }
 
-    this.paginaAtual = 1;
-    this.atualizarPaginacao();
+    this.egressoService.getEgressoByName(this.paginaAtual - 1, this.itensPorPagina, this.searchTerm).subscribe(
+      {
+        next: (response) => {
+          this.egressos = response.content
+        }
+      }
+    )
   }
 
+
   atualizarPaginacao() {
-    this.totalPaginas = Math.ceil(
-      this.egressosFiltrados.length / this.itensPorPagina
-    );
+ 
+    this.getEgressos();
 
-    const inicio = (this.paginaAtual - 1) * this.itensPorPagina;
-    const fim = inicio + this.itensPorPagina;
-
-    this.egressosPaginados = this.egressosFiltrados.slice(inicio, fim);
   }
 
   paginaAnterior() {
@@ -190,21 +131,22 @@ export class ManageEgressoComponent {
 
   criarNovoEgresso() {
 
-    this.manageEgressoService.emitirEgresso({operation: true})
+    this.router.navigate(['/cadastrar_egresso']);
+  
   }
 
   editarEgresso(egresso: IEgresso) {
 
-    this.manageEgressoService.emitirEgresso({operation: false, egresso: egresso})
-
+    this.router.navigate(['/atualizar_egresso/cpf/', egresso.cpf]);
   }
 
   fecharModal(){
     this.isOpen = false;
   }
 
-  openModal(egresso: IEgresso, mode: 'visualizar' | 'excluir'){
+  openModal(egresso: IEgresso, index: number, mode: 'visualizar' | 'excluir'){
     this.viewEgresso = egresso;
+    this.viewCurso = this.cursosEgressos[index];
 
     this.isOpen = true;
 
@@ -212,16 +154,21 @@ export class ManageEgressoComponent {
   }
 
   excluirEgresso(egresso: IEgresso) {
-  
-    alert('excluir');
 
-    this.egressoService.deletarEgresso(egresso.id).subscribe(
+  
+    this.egressoService.deletarEgressoLogica(egresso.id).subscribe(
       {
         next: (response) => {
+
+          console.log(response);
+
+          this.buscarEgresso()
 
         },
         error: (error) => {
           console.error(error);
+
+
         },
         complete: () => {
           
