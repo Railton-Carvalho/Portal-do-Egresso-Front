@@ -13,15 +13,9 @@
               </div>
   
               <div>
-                <p><strong>Descrição:</strong> {{ viewTestimonial.content }}</p>
+                <p><strong>Descrição:</strong> {{ viewTestimonial.texto }}</p>
               </div>
-  
-              <!-- <div class="list-cursos">
-                <p><strong>Cursos:</strong></p>
-                <ul>
-                  <li *ngFor="let curso of viewTestimonial.egressoCursos">{{curso}}</li>
-                </ul>
-              </div> -->
+
   
           </div>
   
@@ -61,18 +55,18 @@
             class="search-input"
             placeholder="Pesquisar"
             [(ngModel)]="searchTerm"
-            (input)="filtrarEgressos()"
+            (input)="verificarCampo($event)"
           />
   
-          <img src="/assets/icons/search-icon.svg" alt="">
+          <img src="/assets/icons/search-icon.svg" alt="" (click)="buscarDepoimentos()">
         </div>
 
       </div>
     
       <div class="lista-itens">
   
-        <div class="item" *ngFor="let testimonials of testimonialsPaginados">
-          <span>{{ testimonials.content }}</span>
+        <div class="item" *ngFor="let testimonials of testimonials">
+          <span>{{ testimonials.texto }}</span>
           <div class="item-acoes">
             <button class="btn-acao visualizar" (click)="openModal(testimonials, 'visualizar')">
               <img src="/assets/icons/view-icon.svg" alt="">

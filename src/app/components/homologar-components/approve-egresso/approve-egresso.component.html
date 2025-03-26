@@ -22,7 +22,7 @@
               <div class="list-cursos">
                 <p><strong>Cursos:</strong></p>
                 <ul>
-                  <li *ngFor="let curso of viewEgresso.egressoCursos">{{curso}}</li>
+                  <li *ngFor="let item of viewCurso">{{item.nome}}</li>
                 </ul>
               </div>
   
@@ -64,7 +64,7 @@
             class="search-input"
             placeholder="Pesquisar"
             [(ngModel)]="searchTerm"
-            (input)="filtrarEgressos()"
+            (input)="verificarCampo($event)"
           />
   
           <img src="/assets/icons/search-icon.svg" alt="">
@@ -74,16 +74,16 @@
     
       <div class="lista-itens">
   
-        <div class="item" *ngFor="let egresso of egressosPaginados">
+        <div class="item" *ngFor="let egresso of egressos; let i = index">
           <span>{{ egresso.nome }}</span>
           <div class="item-acoes">
-            <button class="btn-acao visualizar" (click)="openModal(egresso, 'visualizar')">
+            <button class="btn-acao visualizar" (click)="openModal(egresso, i, 'visualizar')">
               <img src="/assets/icons/view-icon.svg" alt="">
             </button>
-            <button class="btn-acao aprovar" (click)="openModal(egresso, 'aprovar')">
+            <button class="btn-acao aprovar" (click)="openModal(egresso, i, 'aprovar')">
               <img src="/assets/icons/approve-icon.svg" alt="">
             </button>
-            <button class="btn-acao rejeitar" (click)="openModal(egresso, 'rejeitar')">
+            <button class="btn-acao rejeitar" (click)="openModal(egresso, i, 'rejeitar')">
               <img src="/assets/icons/reject-icon.svg" alt="">
             </button>
           </div>

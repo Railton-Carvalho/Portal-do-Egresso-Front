@@ -1,6 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { IEgresso } from '../../../interfaces/egresso.interface';
-import { ManageEgressoService } from '../../../services/manage-egresso.service';
 import { OportunityService } from '../../../services/oportunity.service';
 import { IOportunity } from '../../../interfaces/oportunity.interface';
 
@@ -12,9 +11,7 @@ import { IOportunity } from '../../../interfaces/oportunity.interface';
 })
 export class ApproveOportunityComponent {
 
-  constructor(private manageEgressoService: ManageEgressoService, private oportunityService: OportunityService) {}
-
-  @Output('onEgresso') onEgressoEmitt = new EventEmitter<any>();
+  constructor(private oportunityService: OportunityService) {}
 
   oportunitysFiltrados: any[] = [];
   searchTerm: string = '';
@@ -23,64 +20,7 @@ export class ApproveOportunityComponent {
   totalPaginas: number = 4;
   oportunitysPaginados: any[] = [];
 
-  oportunitys: IOportunity[]  =  [
-      {
-        id: 1,
-        title: "TÍTULO DA OPORTUNIDADE 1",
-         testimonials: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus auctor tortor ac erat vestibulum pellentesque. Mauris ac ligula luctus, consectetur eros at, gravida dui. Nam mattis mattis nunc quis auctor. Suspendisse consequat varius orci et iaculis. Praesent nisi dolor, sollicitudin eget maximus eu, tempus eu ante. Maecenas id condimentum velit, vel faucibus magna. Vestibulum arcu lectus, tincidunt vitae augue sed, congue consequat est. Praesent eget augue bibendum, venenatis mi in, elementum leo.",
-        status: "Aprovado", 
-        createdAt: "2025-02-02", 
-        updatedAt: "2025-02-02", 
-      },
-      {
-        id: 2,
-        title: "TÍTULO DA OPORTUNIDADE 1",
-         testimonials: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus auctor tortor ac erat vestibulum pellentesque. Mauris ac ligula luctus, consectetur eros at, gravida dui. Nam mattis mattis nunc quis auctor. Suspendisse consequat varius orci et iaculis. Praesent nisi dolor, sollicitudin eget maximus eu, tempus eu ante. Maecenas id condimentum velit, vel faucibus magna. Vestibulum arcu lectus, tincidunt vitae augue sed, congue consequat est. Praesent eget augue bibendum, venenatis mi in, elementum leo.",
-        status: "Aprovado", 
-        createdAt: "2025-02-02", 
-        updatedAt: "2025-02-02", 
-      },
-      {
-        id: 2,
-        title: "TÍTULO DA OPORTUNIDADE 1",
-         testimonials: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus auctor tortor ac erat vestibulum pellentesque. Mauris ac ligula luctus, consectetur eros at, gravida dui. Nam mattis mattis nunc quis auctor. Suspendisse consequat varius orci et iaculis. Praesent nisi dolor, sollicitudin eget maximus eu, tempus eu ante. Maecenas id condimentum velit, vel faucibus magna. Vestibulum arcu lectus, tincidunt vitae augue sed, congue consequat est. Praesent eget augue bibendum, venenatis mi in, elementum leo.",
-        status: "Aprovado", 
-        createdAt: "2025-02-02", 
-        updatedAt: "2025-02-02", 
-      },
-      {
-        id: 2,
-        title: "TÍTULO DA OPORTUNIDADE 1",
-         testimonials: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus auctor tortor ac erat vestibulum pellentesque. Mauris ac ligula luctus, consectetur eros at, gravida dui. Nam mattis mattis nunc quis auctor. Suspendisse consequat varius orci et iaculis. Praesent nisi dolor, sollicitudin eget maximus eu, tempus eu ante. Maecenas id condimentum velit, vel faucibus magna. Vestibulum arcu lectus, tincidunt vitae augue sed, congue consequat est. Praesent eget augue bibendum, venenatis mi in, elementum leo.",
-        status: "Aprovado", 
-        createdAt: "2025-02-02", 
-        updatedAt: "2025-02-02", 
-      },
-      {
-        id: 2,
-        title: "TÍTULO DA OPORTUNIDADE 1",
-         testimonials: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus auctor tortor ac erat vestibulum pellentesque. Mauris ac ligula luctus, consectetur eros at, gravida dui. Nam mattis mattis nunc quis auctor. Suspendisse consequat varius orci et iaculis. Praesent nisi dolor, sollicitudin eget maximus eu, tempus eu ante. Maecenas id condimentum velit, vel faucibus magna. Vestibulum arcu lectus, tincidunt vitae augue sed, congue consequat est. Praesent eget augue bibendum, venenatis mi in, elementum leo.",
-        status: "Aprovado", 
-        createdAt: "2025-02-02", 
-        updatedAt: "2025-02-02", 
-      },
-      {
-        id: 2,
-        title: "TÍTULO DA OPORTUNIDADE 1",
-         testimonials: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus auctor tortor ac erat vestibulum pellentesque. Mauris ac ligula luctus, consectetur eros at, gravida dui. Nam mattis mattis nunc quis auctor. Suspendisse consequat varius orci et iaculis. Praesent nisi dolor, sollicitudin eget maximus eu, tempus eu ante. Maecenas id condimentum velit, vel faucibus magna. Vestibulum arcu lectus, tincidunt vitae augue sed, congue consequat est. Praesent eget augue bibendum, venenatis mi in, elementum leo.",
-        status: "Aprovado", 
-        createdAt: "2025-02-02", 
-        updatedAt: "2025-02-02", 
-      },
-      {
-        id: 2,
-        title: "TÍTULO DA OPORTUNIDADE 1",
-        testimonials: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus auctor tortor ac erat vestibulum pellentesque. Mauris ac ligula luctus, consectetur eros at, gravida dui. Nam mattis mattis nunc quis auctor. Suspendisse consequat varius orci et iaculis. Praesent nisi dolor, sollicitudin eget maximus eu, tempus eu ante. Maecenas id condimentum velit, vel faucibus magna. Vestibulum arcu lectus, tincidunt vitae augue sed, congue consequat est. Praesent eget augue bibendum, venenatis mi in, elementum leo.",
-        status: "Aprovado", 
-        createdAt: "2025-02-02", 
-        updatedAt: "2025-02-02", 
-      },
-  ]
+  oportunitys: any[]  = []
 
   // modal 
 
@@ -89,32 +29,50 @@ export class ApproveOportunityComponent {
   viewOportunity: IOportunity = {} as IOportunity;
 
   ngOnInit(): void {
-    this.filtrarEgressos();
+
+    this.getOportunitys();
+
   }
 
-  filtrarEgressos() {
-    if (this.searchTerm.trim() === '') {
-      this.oportunitysFiltrados = this.oportunitys;
-    } else {
-      const termo = this.searchTerm.toLowerCase();
-      this.oportunitysFiltrados = this.oportunitys.filter((e) =>
-        e.title.toLowerCase().includes(termo)
-      );
+  getOportunitys(){
+
+    this.oportunityService.getOportunityPendentes(this.paginaAtual - 1, this.itensPorPagina, this.searchTerm).subscribe(
+      {
+        next: (response) => {
+
+          this.oportunitys = response.content;
+
+          this.totalPaginas = response.totalPages;
+
+          console.log(response);
+
+        }
+      }
+    )
+
+  }
+
+  verificarCampo(event: Event) {
+    const valor = (event.target as HTMLInputElement).value;
+    if (valor.trim() === '') {
+      this.buscarOportunitys();
     }
+  }
+
+
+  buscarOportunitys() {
 
     this.paginaAtual = 1;
-    this.atualizarPaginacao();
+    
+    this.getOportunitys()
+
   }
 
+
   atualizarPaginacao() {
-    this.totalPaginas = Math.ceil(
-      this.oportunitysFiltrados.length / this.itensPorPagina
-    );
+   
+    this.getOportunitys();
 
-    const inicio = (this.paginaAtual - 1) * this.itensPorPagina;
-    const fim = inicio + this.itensPorPagina;
-
-    this.oportunitysPaginados = this.oportunitysFiltrados.slice(inicio, fim);
   }
 
   paginaAnterior() {
@@ -132,15 +90,17 @@ export class ApproveOportunityComponent {
   }
 
 
-  aprovarEgresso(oportunity: IOportunity) {
+  aprovarOportunity(oportunity: IOportunity) {
 
     this.oportunityService.approve(oportunity.id).subscribe(
       {
         next: (response) =>{
-          
+          console.log(response)
+
+          this.buscarOportunitys()
         },
         error: (error) => {
-          alert(error);
+          console.error(error);
         },
         complete: () => {
 
@@ -152,16 +112,19 @@ export class ApproveOportunityComponent {
 
   }
 
-  rejeitarEgresso(oportunity: IOportunity) {
+  rejeitarOportunity(oportunity: IOportunity) {
   
 
     this.oportunityService.reject(oportunity.id).subscribe(
       {
         next: (response) =>{
-          
+          console.log(response)
+
+          this.buscarOportunitys()
+
         },
         error: (error) => {
-          alert(error);
+          console.error(error);
         },
         complete: () => {
 

@@ -1,6 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { IEgresso } from '../../../interfaces/egresso.interface';
-import { ManageEgressoService } from '../../../services/manage-egresso.service';
 import { TestimonialService } from '../../../services/testimonial.service';
 import { ITestimonial } from '../../../interfaces/testimonial.interface';
 
@@ -13,9 +12,7 @@ import { ITestimonial } from '../../../interfaces/testimonial.interface';
 })
 export class ApproveTestimonialsComponent {
 
-  constructor(private manageEgressoService: ManageEgressoService, private testimonialService: TestimonialService) {}
-
-  @Output('onEgresso') onEgressoEmitt = new EventEmitter<any>();
+  constructor(private testimonialService: TestimonialService) {}
 
   testimonialsFiltrados: any[] = [];
   searchTerm: string = '';
@@ -24,74 +21,7 @@ export class ApproveTestimonialsComponent {
   totalPaginas: number = 4;
   testimonialsPaginados: any[] = [];
 
-  testimonials: ITestimonial[]  =  [
-      {
-        id: 1,
-        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus auctor tortor ac erat vestibulum pellentesque. Mauris ac ligula luctus, consectetur eros at, gravida dui. Nam mattis mattis nunc quis auctor. Suspendisse consequat varius orci et iaculis. Praesent nisi dolor, sollicitudin eget maximus eu, tempus eu ante. Maecenas id condimentum velit, vel faucibus magna. Vestibulum arcu lectus, tincidunt vitae augue sed, congue consequat est. Praesent eget augue bibendum, venenatis mi in, elementum leo.",
-        createdAt: "2025-02-02", 
-        updatedAt: "2025-02-02", 
-      },
-      {
-        id: 1,
-        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus auctor tortor ac erat vestibulum pellentesque. Mauris ac ligula luctus, consectetur eros at, gravida dui. Nam mattis mattis nunc quis auctor. Suspendisse consequat varius orci et iaculis. Praesent nisi dolor, sollicitudin eget maximus eu, tempus eu ante. Maecenas id condimentum velit, vel faucibus magna. Vestibulum arcu lectus, tincidunt vitae augue sed, congue consequat est. Praesent eget augue bibendum, venenatis mi in, elementum leo.",
-        createdAt: "2025-02-02", 
-        updatedAt: "2025-02-02", 
-      },
-      {
-        id: 1,
-        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus auctor tortor ac erat vestibulum pellentesque. Mauris ac ligula luctus, consectetur eros at, gravida dui. Nam mattis mattis nunc quis auctor. Suspendisse consequat varius orci et iaculis. Praesent nisi dolor, sollicitudin eget maximus eu, tempus eu ante. Maecenas id condimentum velit, vel faucibus magna. Vestibulum arcu lectus, tincidunt vitae augue sed, congue consequat est. Praesent eget augue bibendum, venenatis mi in, elementum leo.",
-        createdAt: "2025-02-02", 
-        updatedAt: "2025-02-02", 
-      },
-      {
-        id: 1,
-        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus auctor tortor ac erat vestibulum pellentesque. Mauris ac ligula luctus, consectetur eros at, gravida dui. Nam mattis mattis nunc quis auctor. Suspendisse consequat varius orci et iaculis. Praesent nisi dolor, sollicitudin eget maximus eu, tempus eu ante. Maecenas id condimentum velit, vel faucibus magna. Vestibulum arcu lectus, tincidunt vitae augue sed, congue consequat est. Praesent eget augue bibendum, venenatis mi in, elementum leo.",
-        createdAt: "2025-02-02", 
-        updatedAt: "2025-02-02", 
-      },
-      {
-        id: 1,
-        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus auctor tortor ac erat vestibulum pellentesque. Mauris ac ligula luctus, consectetur eros at, gravida dui. Nam mattis mattis nunc quis auctor. Suspendisse consequat varius orci et iaculis. Praesent nisi dolor, sollicitudin eget maximus eu, tempus eu ante. Maecenas id condimentum velit, vel faucibus magna. Vestibulum arcu lectus, tincidunt vitae augue sed, congue consequat est. Praesent eget augue bibendum, venenatis mi in, elementum leo.",
-        createdAt: "2025-02-02", 
-        updatedAt: "2025-02-02", 
-      },
-      {
-        id: 1,
-        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus auctor tortor ac erat vestibulum pellentesque. Mauris ac ligula luctus, consectetur eros at, gravida dui. Nam mattis mattis nunc quis auctor. Suspendisse consequat varius orci et iaculis. Praesent nisi dolor, sollicitudin eget maximus eu, tempus eu ante. Maecenas id condimentum velit, vel faucibus magna. Vestibulum arcu lectus, tincidunt vitae augue sed, congue consequat est. Praesent eget augue bibendum, venenatis mi in, elementum leo.",
-        createdAt: "2025-02-02", 
-        updatedAt: "2025-02-02", 
-      },
-      {
-        id: 1,
-        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus auctor tortor ac erat vestibulum pellentesque. Mauris ac ligula luctus, consectetur eros at, gravida dui. Nam mattis mattis nunc quis auctor. Suspendisse consequat varius orci et iaculis. Praesent nisi dolor, sollicitudin eget maximus eu, tempus eu ante. Maecenas id condimentum velit, vel faucibus magna. Vestibulum arcu lectus, tincidunt vitae augue sed, congue consequat est. Praesent eget augue bibendum, venenatis mi in, elementum leo.",
-        createdAt: "2025-02-02", 
-        updatedAt: "2025-02-02", 
-      },
-      {
-        id: 1,
-        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus auctor tortor ac erat vestibulum pellentesque. Mauris ac ligula luctus, consectetur eros at, gravida dui. Nam mattis mattis nunc quis auctor. Suspendisse consequat varius orci et iaculis. Praesent nisi dolor, sollicitudin eget maximus eu, tempus eu ante. Maecenas id condimentum velit, vel faucibus magna. Vestibulum arcu lectus, tincidunt vitae augue sed, congue consequat est. Praesent eget augue bibendum, venenatis mi in, elementum leo.",
-        createdAt: "2025-02-02", 
-        updatedAt: "2025-02-02", 
-      },
-      {
-        id: 1,
-        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus auctor tortor ac erat vestibulum pellentesque. Mauris ac ligula luctus, consectetur eros at, gravida dui. Nam mattis mattis nunc quis auctor. Suspendisse consequat varius orci et iaculis. Praesent nisi dolor, sollicitudin eget maximus eu, tempus eu ante. Maecenas id condimentum velit, vel faucibus magna. Vestibulum arcu lectus, tincidunt vitae augue sed, congue consequat est. Praesent eget augue bibendum, venenatis mi in, elementum leo.",
-        createdAt: "2025-02-02", 
-        updatedAt: "2025-02-02", 
-      },
-      {
-        id: 1,
-        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus auctor tortor ac erat vestibulum pellentesque. Mauris ac ligula luctus, consectetur eros at, gravida dui. Nam mattis mattis nunc quis auctor. Suspendisse consequat varius orci et iaculis. Praesent nisi dolor, sollicitudin eget maximus eu, tempus eu ante. Maecenas id condimentum velit, vel faucibus magna. Vestibulum arcu lectus, tincidunt vitae augue sed, congue consequat est. Praesent eget augue bibendum, venenatis mi in, elementum leo.",
-        createdAt: "2025-02-02", 
-        updatedAt: "2025-02-02", 
-      },
-      {
-        id: 1,
-        content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus auctor tortor ac erat vestibulum pellentesque. Mauris ac ligula luctus, consectetur eros at, gravida dui. Nam mattis mattis nunc quis auctor. Suspendisse consequat varius orci et iaculis. Praesent nisi dolor, sollicitudin eget maximus eu, tempus eu ante. Maecenas id condimentum velit, vel faucibus magna. Vestibulum arcu lectus, tincidunt vitae augue sed, congue consequat est. Praesent eget augue bibendum, venenatis mi in, elementum leo.",
-        createdAt: "2025-02-02", 
-        updatedAt: "2025-02-02", 
-      },
-  ]
+  testimonials: any[] = []
 
   // modal 
 
@@ -100,32 +30,49 @@ export class ApproveTestimonialsComponent {
   viewTestimonial: ITestimonial = {} as ITestimonial;
 
   ngOnInit(): void {
-    this.filtrarEgressos();
+
+    this.getTestimonial();
+
   }
 
-  filtrarEgressos() {
-    if (this.searchTerm.trim() === '') {
-      this.testimonialsFiltrados = this.testimonials;
-    } else {
-      const termo = this.searchTerm.toLowerCase();
-      this.testimonialsFiltrados = this.testimonials.filter((e) =>
-        e.content.toLowerCase().includes(termo)
-      );
+  getTestimonial(){
+
+    this.testimonialService.getPendentes(this.paginaAtual - 1, this.itensPorPagina, this.searchTerm).subscribe(
+      {
+        next: (response) => {
+
+          this.testimonials = response.content;
+
+          this.totalPaginas = response.totalPages;
+
+          console.log(response);
+
+        }
+      }
+    )
+
+  }
+
+  verificarCampo(event: Event) {
+    const valor = (event.target as HTMLInputElement).value;
+    if (valor.trim() === '') {
+      this.buscarDepoimentos();
     }
+  }
+
+
+  buscarDepoimentos() {
 
     this.paginaAtual = 1;
-    this.atualizarPaginacao();
+    
+    this.getTestimonial()
+
   }
 
   atualizarPaginacao() {
-    this.totalPaginas = Math.ceil(
-      this.testimonialsFiltrados.length / this.itensPorPagina
-    );
+  
+    this.getTestimonial();
 
-    const inicio = (this.paginaAtual - 1) * this.itensPorPagina;
-    const fim = inicio + this.itensPorPagina;
-
-    this.testimonialsPaginados = this.testimonialsFiltrados.slice(inicio, fim);
   }
 
   paginaAnterior() {
@@ -145,12 +92,12 @@ export class ApproveTestimonialsComponent {
 
   aprovarEgresso(testimonial: ITestimonial) {
 
-    alert('aprovado')
-
     this.testimonialService.approve(testimonial.id).subscribe(
       {
         next: (response) =>{
-          
+          console.log(response)
+
+          this.buscarDepoimentos()
         },
         error: (error) => {
         },
@@ -166,12 +113,13 @@ export class ApproveTestimonialsComponent {
 
   rejeitarEgresso(testimonial: ITestimonial) {
   
-    alert('rejeitar');
 
     this.testimonialService.reject(testimonial.id).subscribe(
       {
         next: (response) =>{
-          
+          console.log(response)
+
+          this.buscarDepoimentos()
         },
         error: (error) => {
         },

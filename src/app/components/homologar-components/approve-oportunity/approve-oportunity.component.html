@@ -13,8 +13,8 @@
               </div>
   
               <div>
-                <p><strong>Titulo:</strong> {{ viewOportunity.title }}</p>
-                <p><strong>Descrição:</strong> {{ viewOportunity.testimonials }}</p>
+                <p><strong>Titulo:</strong> {{ viewOportunity.titulo }}</p>
+                <p><strong>Descrição:</strong> {{ viewOportunity.descricao }}</p>
               </div>
   
               <!-- <div class="list-cursos">
@@ -33,15 +33,15 @@
   
         <div *ngSwitchCase="'aprovar'">
             <h2 class="title-aprovar">Confirmar Aprovação</h2>
-            <p>Tem certeza de que deseja aprovar a oportunidade <strong>{{ viewOportunity.title }}</strong>?</p>
-            <button class="btn-modal btn-aprovar" (click)="aprovarEgresso(viewOportunity)">Sim, aprovar</button>
+            <p>Tem certeza de que deseja aprovar a oportunidade <strong>{{ viewOportunity.titulo }}</strong>?</p>
+            <button class="btn-modal btn-aprovar" (click)="aprovarOportunity(viewOportunity)">Sim, aprovar</button>
             <button class="btn-modal btn-close" (click)="fecharModal()" style="margin-top: 1rem;">Fechar</button>
         </div>
 
         <div *ngSwitchCase="'rejeitar'">
           <h2 class="title-rejeitar">Confirmar Rejeição</h2>
-          <p>Tem certeza de que deseja rejeitar a oportunidade <strong>{{ viewOportunity.title }}</strong>?</p>
-          <button class="btn-modal btn-rejeitar" (click)="rejeitarEgresso(viewOportunity)">Sim, rejeitar</button>
+          <p>Tem certeza de que deseja rejeitar a oportunidade <strong>{{ viewOportunity.titulo }}</strong>?</p>
+          <button class="btn-modal btn-rejeitar" (click)="rejeitarOportunity(viewOportunity)">Sim, rejeitar</button>
           <button class="btn-modal btn-close" (click)="fecharModal()" style="margin-top: 1rem;">Fechar</button>
         </div>
   
@@ -62,18 +62,19 @@
             class="search-input"
             placeholder="Pesquisar"
             [(ngModel)]="searchTerm"
-            (input)="filtrarEgressos()"
+            (input)="verificarCampo($event)"
+            
           />
   
-          <img src="/assets/icons/search-icon.svg" alt="">
+          <img src="/assets/icons/search-icon.svg" alt="" (click)="buscarOportunitys()">
         </div>
 
       </div>
     
       <div class="lista-itens">
   
-        <div class="item" *ngFor="let oportunity of oportunitysPaginados">
-          <span>{{ oportunity.title }}</span>
+        <div class="item" *ngFor="let oportunity of oportunitys">
+          <span>{{ oportunity.titulo }}</span>
           <div class="item-acoes">
             <button class="btn-acao visualizar" (click)="openModal(oportunity, 'visualizar')">
               <img src="/assets/icons/view-icon.svg" alt="">
