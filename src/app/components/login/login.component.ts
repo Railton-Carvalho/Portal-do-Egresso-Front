@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { AutenticationService } from '../../services/autentication.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,10 +12,11 @@ import { AutenticationService } from '../../services/autentication.service';
 })
 export class LoginComponent implements OnInit {
   
+  typeUser: boolean = true;
 
   loginForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AutenticationService){}
+  constructor(private fb: FormBuilder, private authService: AutenticationService, private router: Router){}
 
   ngOnInit(){
 
@@ -24,14 +26,13 @@ export class LoginComponent implements OnInit {
     });
 
 
-
   }
 
   onSubmit(){
 
     if(this.loginForm.valid){
 
-      const login = { user: this.loginForm.get('user')?.value, password: this.loginForm.get('password')?.value}
+      const login = { data: this.loginForm.get('email')?.value, password: this.loginForm.get('password')?.value, role: this.typeUser ? 'coordenador' : 'egresso'}
 
       this.authService.login(login).subscribe(
         {
@@ -39,7 +40,8 @@ export class LoginComponent implements OnInit {
 
             if(response.success){
 
-              // ir para rota ou componente dashboard         
+              this.router.navigate(['dashboard']);
+
 
             }else{
             
@@ -63,8 +65,6 @@ export class LoginComponent implements OnInit {
 
   }
 
-
-  typeUser: boolean = true;
 
   typeUserCoordenador() {
 
