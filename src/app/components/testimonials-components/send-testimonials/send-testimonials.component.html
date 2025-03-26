@@ -1,26 +1,28 @@
 <h1 class="page-title">Enviar Depoimento</h1>
 <div class="main-content">
-    <!-- <mat-form-field class="example-full-width">
-        <mat-label>Título</mat-label>
-        <input 
-          matInput 
-          placeholder="Digite o Título" 
-          [formControl]=" titleFormControl"
-          required>
-        <mat-error *ngIf="titleFormControl.hasError('required')">
-          O título é <strong>obrigatório</strong>.
-        </mat-error>
-      </mat-form-field> -->
-    <mat-form-field class="inputDepoimento">
-        <mat-label>Depoimento</mat-label>
-        <textarea matInput pla [formControl]=" titleFormControl"
-        required>></textarea>
-        <mat-error *ngIf="titleFormControl.hasError('required')">
-            O Depoimento é <strong>obrigatório</strong>.
-        </mat-error>
-    </mat-form-field>
-    <button mat-raised-button color="primary" type="submit" class="submit-button">
-        Enviar
-    </button>
+    <form (ngSubmit)="onSubmit()">
+      <!-- <mat-form-field class="example-full-width">
+          <mat-label>Título</mat-label>
+          <input
+            matInput
+            placeholder="Digite o Título"
+            [formControl]=" titleFormControl"
+            required>
+          <mat-error *ngIf="titleFormControl.hasError('required')">
+            O título é <strong>obrigatório</strong>.
+          </mat-error>
+        </mat-form-field> -->
+      <mat-form-field class="inputDepoimento">
+          <mat-label>Depoimento</mat-label>
+          <textarea matInput pla [formControl]="depoimentoFormControl"
+          required>></textarea>
+          <mat-error *ngIf="depoimentoFormControl.hasError('required')">
+              O Depoimento é <strong>obrigatório</strong>.
+          </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit" class="submit-button">
+          Enviar
+      </button>
+    </form>
 
 </div>

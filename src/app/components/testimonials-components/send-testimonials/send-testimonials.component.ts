@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { TestimonialService } from '../../../services/testimonial.service';
+import { AutenticationService } from '../../../services/autentication.service';
 
 @Component({
   selector: 'app-send-testimonials',
@@ -8,7 +10,28 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrl: './send-testimonials.component.scss'
 })
 export class SendTestimonialsComponent {
-  titleFormControl = new FormControl('', [Validators.required]);
+  depoimentoFormControl = new FormControl('', [Validators.required]);
 
+  constructor(private testimonialService: TestimonialService, private authService: AutenticationService){}
+
+  onSubmit(){
+
+    let testimoal = {
+      egressoId: Number(this.authService.getId()),
+      texto: this.depoimentoFormControl.value
+    }
+
+    this.testimonialService.create(testimoal).subscribe(
+      {
+        next: (response) => {
+          console.log(response);
+        },
+        error: (error) => [
+          console.error(error)
+        ]
+      }
+    )
+
+  }
  
 }

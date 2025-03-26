@@ -3,10 +3,10 @@
   
     <div class="container-testimonial">
 
-      <div class="testimonial-item" *ngFor="let d of testimonials">
+      <div class="testimonial-item" *ngFor="let d of testimonials, let i = index">
         <div class="user-icon"></div>
         <div class="testimonial-content">
-          <h2>{{ d.nome }}</h2>
+          <h2>{{ d.egresso?.nome }}</h2>
           <!-- <p class="short-text" *ngIf="!d.isExpanded">
             {{ d.shortText }}
           </p>
@@ -14,13 +14,18 @@
             {{ d.fullText }}
           </p> -->
 
-          <p class="full-text" [ngClass]="{'shortText': !d.isExpanded}">
-            {{ d.fullText }}
+          <p class="full-text" [ngClass]="{'shortText': !expandedTestimonials[i]}">
+            {{ d.texto }}
           </p>
-
-          <a href="#" class="toggle-text" (click)="toggleText(d, $event)">
-            {{ d.isExpanded ? 'Ver menos' : 'Ver mais' }}
+  
+          <a 
+            href="#" 
+            class="toggle-text" 
+            *ngIf="d.texto.length > 85" 
+            (click)="toggleText(i, $event)">
+            {{ expandedTestimonials[i] ? 'Ver menos' : 'Ver mais' }}
           </a>
+
         </div>
       </div>
       

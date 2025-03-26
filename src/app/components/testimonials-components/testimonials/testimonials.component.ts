@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { TestimonialService } from '../../../services/testimonial.service';
+import { EgressoService } from '../../../services/egresso.service';
 
 @Component({
   selector: 'app-testimonials',
@@ -9,48 +11,58 @@ import { Component } from '@angular/core';
 export class TestimonialsComponent {
    // Lista de depoimentos (exemplo fixo).
   // Em um app real, você poderia buscar via serviço/HTTP.
-  testimonials = [
-    {
-      nome: 'Railton',
-      shortText: 'Minha jornada no curso de Ciência da Computação foi transformadora. Desde o primeiro semestre...',
-      fullText: 'Minha jornada no curso de Ciência da Computação foi transformadora. Desde o primeiro semestre, precisei de maneira lógica e resolver problemas complexos, habilidades que hoje utilizo diariamente no mercado de trabalho. O curso não apenas me proporcionou uma base sólida em programação e tecnologias, mas também me ensinou a trabalhar em equipe e a desenvolver projetos reais, algo essencial na minha carreira como desenvolvedor.',
-      isExpanded: false
-    },
-    {
-      nome: 'Isabele',
-      shortText: 'Minha jornada no curso de Ciência da Computação foi transformadora. Desde o primeiro semestre...',
-      fullText: 'Minha jornada no curso de Ciência da Computação foi transformadora. Desde o primeiro semestre, precisei de maneira lógica e resolver problemas complexos, habilidades que hoje utilizo diariamente no mercado de trabalho. O curso não apenas me proporcionou uma base sólida em programação e tecnologias, mas também me ensinou a trabalhar em equipe e a desenvolver projetos reais, algo essencial na minha carreira como desenvolvedor.',
-      isExpanded: false
-    },
-    {
-      nome: 'Neymar',
-      shortText: 'Minha jornada no curso de Ciência da Computação foi transformadora. Desde o primeiro semestre...',
-      fullText: 'Minha jornada no curso de Ciência da Computação foi transformadora. Desde o primeiro semestre, precisei de maneira lógica e resolver problemas complexos, habilidades que hoje utilizo diariamente no mercado de trabalho. O curso não apenas me proporcionou uma base sólida em programação e tecnologias, mas também me ensinou a trabalhar em equipe e a desenvolver projetos reais, algo essencial na minha carreira como desenvolvedor.',
-      isExpanded: false
-    },
-    {
-      nome: 'Orlando',
-      shortText: 'Minha jornada no curso de Ciência da Computação foi transformadora. Desde o primeiro semestre...',
-      fullText: 'Minha jornada no curso de Ciência da Computação foi transformadora. Desde o primeiro semestre, precisei de maneira lógica e resolver problemas complexos, habilidades que hoje utilizo diariamente no mercado de trabalho. O curso não apenas me proporcionou uma base sólida em programação e tecnologias, mas também me ensinou a trabalhar em equipe e a desenvolver projetos reais, algo essencial na minha carreira como desenvolvedor.',
-      isExpanded: false
-    },
-    {
-      nome: 'Orlando',
-      shortText: 'Minha jornada no curso de Ciência da Computação foi transformadora. Desde o primeiro semestre...',
-      fullText: 'Minha jornada no curso de Ciência da Computação foi transformadora. Desde o primeiro semestre, precisei de maneira lógica e resolver problemas complexos, habilidades que hoje utilizo diariamente no mercado de trabalho. O curso não apenas me proporcionou uma base sólida em programação e tecnologias, mas também me ensinou a trabalhar em equipe e a desenvolver projetos reais, algo essencial na minha carreira como desenvolvedor.',
-      isExpanded: false
-    },
-    {
-      nome: 'Orlando',
-      shortText: 'Minha jornada no curso de Ciência da Computação foi transformadora. Desde o primeiro semestre...',
-      fullText: 'Minha jornada no curso de Ciência da Computação foi transformadora. Desde o primeiro semestre, precisei de maneira lógica e resolver problemas complexos, habilidades que hoje utilizo diariamente no mercado de trabalho. O curso não apenas me proporcionou uma base sólida em programação e tecnologias, mas também me ensinou a trabalhar em equipe e a desenvolver projetos reais, algo essencial na minha carreira como desenvolvedor.',
-      isExpanded: false
-    }
-  ];
+  testimonials: any[] = [];
 
-  // Alterna o estado "expandido" do depoimento ao clicar no link
-  toggleText(depoimento: any, event: Event) {
+  pageAtual: number = 1;
+  size: number = 15;
+  totalPage: number = 1;
+
+  
+  expandedTestimonials: { [key: number]: boolean } = {};
+
+  constructor(private testimonialService: TestimonialService, private egressoService: EgressoService){}
+
+  ngOnInit() {
+
+    this.getTestimonials()
+
+  }
+
+  getTestimonials() {
+
+    this.testimonialService.getAll(this.pageAtual -1, this.size).subscribe(
+      {
+        next: (response) => {
+          console.log(response);
+
+          this.testimonials = response.content;
+
+          this.totalPage = response.totalPages; 
+
+          this.testimonials.forEach((d, i) => {
+            this.expandedTestimonials[i] = false; // Inicia todos os depoimentos recolhidos
+
+            this.egressoService.getEgressoById(d.id_Egresso).subscribe(
+             { 
+              next: (response) => {
+                d.egresso = response;
+              }
+            }
+            )
+
+          });
+
+          
+
+        }
+      }
+    )
+
+  }
+
+
+  toggleText(index: number, event: Event) {
     event.preventDefault(); // para não rolar para o topo
-    depoimento.isExpanded = !depoimento.isExpanded;
+    this.expandedTestimonials[index] = !this.expandedTestimonials[index];
   }
 }
