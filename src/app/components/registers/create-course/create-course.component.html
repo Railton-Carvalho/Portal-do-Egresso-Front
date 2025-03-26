@@ -2,7 +2,7 @@
     <h1 class="page-title">{{title}} Curso</h1>
     
     <div class="form-container">
-        <form>
+        <form (ngSubmit)="onSubmit()">
             <div class="form-group">
                 <mat-form-field class="example-full-width">
                     <mat-label>Nome Completo</mat-label>
@@ -32,7 +32,7 @@
             </div>
             
             <div class="btn-container">
-                <button type="submit">Cadastrar</button>
+                <button type="submit">{{title}}</button>
             </div>
         </form>
     </div>

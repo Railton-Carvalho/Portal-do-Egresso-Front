@@ -61,19 +61,19 @@
         <!-- Curso -->
         <mat-form-field>
             <mat-label>Curso</mat-label>
-            <mat-select [formControl]="resumoFromControl">
-                <mat-option *ngFor="let course of courseList; let i = index" [value]="course">
-                    {{ (i+1) +' '+ course }}
+            <mat-select [formControl]="cursoFormControl">
+                <mat-option *ngFor="let course of courseList; let i = index" [value]="course.id">
+                    {{ (i+1) +' '+ course.nome }}
                 </mat-option>
             </mat-select>
-            <mat-error *ngIf="resumoFromControl.hasError('required')">
+            <mat-error *ngIf="cursoFormControl.hasError('required')">
               O Curso é <strong>obrigatório</strong>.
           </mat-error>
         </mat-form-field>
             <!-- Ano de Início -->
             <mat-form-field>
                 <mat-label>Data de Início*</mat-label>
-                <input matInput [matDatepicker]="picker2">
+                <input matInput [matDatepicker]="picker2" [formControl]="dataInicio">
                 <mat-hint>DD/MM/AAAA</mat-hint>
                 <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
                 <mat-datepicker #picker2></mat-datepicker>
@@ -82,7 +82,7 @@
               <!-- Ano de Término -->
               <mat-form-field>
                 <mat-label>Data de Término*</mat-label>
-                <input matInput [matDatepicker]="picker">
+                <input matInput [matDatepicker]="picker" [formControl]="dataFim">
                 <mat-hint>DD/MM/AAAA</mat-hint>
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
