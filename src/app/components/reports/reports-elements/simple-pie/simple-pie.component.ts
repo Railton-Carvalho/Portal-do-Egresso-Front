@@ -5,6 +5,7 @@ import {
   ApexResponsive,
   ApexChart
 } from "ng-apexcharts";
+import { ReportsService } from '../../../../services/reports.service';
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -22,29 +23,45 @@ export type ChartOptions = {
 export class SimplePieComponent {
   @ViewChild("chart") chart!: ChartComponent;
   
-  public chartOptions: ChartOptions;
+  public chartOptions!: ChartOptions;
 
-  constructor() {
-    this.chartOptions = {
-      series: [65, 45, 13, 43, 22],
-      chart: {
-        width: 470,
-        type: "pie"
-      },
-      labels: ["Desenvolvedor Backend", "Contador", "Product Owner", "Pedreiro", "Professor"],
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
+  constructor(private reportsService: ReportsService) {}
+  
+
+  ngOnInit() {
+
+    this.reportsService.getGraficoEgressosPorCurso().subscribe(
+      {
+        next: (response) => {
+
+          console.log(response)
+
+          this.chartOptions = {
+            series: response.series,
             chart: {
-              width: 200
+              width: 470,
+              type: "pie"
             },
-            legend: {
-              position: "bottom"
-            }
-          }
+            labels: response.labels,
+            responsive: [
+              {
+                breakpoint: 480,
+                options: {
+                  chart: {
+                    width: 200
+                  },
+                  legend: {
+                    position: "bottom"
+                  }
+                }
+              }
+            ]
+          };
+
         }
-      ]
-    };
+      }
+    )
+
   }
+
 }

@@ -14,6 +14,7 @@ import { ProfitChartComponent } from './reports-elements/profit-chart/profit-cha
         SimplePieComponent,
         DistributedColumnsComponent,
         ProfitChartComponent
+        
     ], declarations: [
         ReportsComponent,
         SimplePieComponent,

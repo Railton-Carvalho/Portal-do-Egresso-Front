@@ -8,6 +8,7 @@ import {
   ApexTitleSubtitle,
   ApexAxisChartSeries
 } from "ng-apexcharts";
+import { ReportsService } from '../../../../services/reports.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -32,43 +33,61 @@ export class ProfitChartComponent implements OnInit{
 
   subTitle: string = 'Egressos Registrados';
 
+
+  constructor(private reportsService: ReportsService) {}
+  
+
   ngOnInit(): void {
-    this.chartOptions = {
-      series: [
-        {
-          name: "Novos Registrados",
-          data: [20, 35, 15, 40, 50, 20, 30, 25, 40, 30, 50, 45] // exemplo
-        }
-      ],
-      chart: {
-        type: 'line',
-        height: 250,
-        sparkline: { enabled: true } // remove eixos, grid, etc.
-      },
-      stroke: {
-        curve: 'straight',
-        width: 3
-      },
-      dataLabels: {
-        enabled: false
-      },
-      xaxis: {
-        categories: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
-      },
-      title: {
-        text: '$135,965',
-        offsetX: 10,
-        style: {
-          fontSize: '22px'
-        }
-      },
-      subtitle: {
-        text: this.subTitle,
-        offsetX: 10,
-        style: {
-          fontSize: '24px'
+
+    this.reportsService.getGraficoPorMes().subscribe(
+      {
+        next: (response) => {
+
+          console.log(response)
+
+          this.chartOptions = {
+            series: [
+              {
+                name: "Novos Registrados",
+                data: response.series
+              }
+            ],
+            chart: {
+              type: 'line',
+              height: 250,
+              sparkline: { enabled: true } // remove eixos, grid, etc.
+            },
+            stroke: {
+              curve: 'straight',
+              width: 3
+            },
+            dataLabels: {
+              enabled: false
+            },
+            xaxis: {
+              categories: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
+            },
+            title: {
+              text: response.series.reduce((acc:number, num: number) => acc + num, 0),
+              offsetX: 10,
+              style: {
+                fontSize: '22px'
+              }
+            },
+            subtitle: {
+              text: this.subTitle,
+              offsetX: 10,
+              style: {
+                fontSize: '24px'
+              }
+            }
+          };
+
         }
       }
-    };
+    )
+
   }
+
+  
 }

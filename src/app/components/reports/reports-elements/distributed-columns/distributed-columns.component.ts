@@ -6,6 +6,7 @@ import {
   ApexPlotOptions,
   ApexAxisChartSeries
 } from "ng-apexcharts";
+import { ReportsService } from '../../../../services/reports.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -23,28 +24,41 @@ export type ChartOptions = {
 export class DistributedColumnsComponent {
   @ViewChild("chart") chart!: ChartComponent;
 
-  public chartOptions: ChartOptions;
+  public chartOptions!: ChartOptions;
 
-  constructor() {
-    this.chartOptions = {
-      series: [
-        {
-          name: "Vendas",
-          data: [30, 40, 25, 50, 49, 21] // Dados corretos
+  constructor(private reportsService: ReportsService) {
+
+    this.reportsService.getGraficoTopSalarios().subscribe(
+      {
+        next: (response) => {
+
+          console.log(response)
+
+          this.chartOptions = {
+            series: [
+              {
+                name: "Top Cursos",
+                data: response.series
+              }
+            ],
+            chart: {
+              type: "bar",
+              height: 350
+            },
+            plotOptions: {
+              bar: {
+                distributed: true
+              }
+            },
+            xaxis: {
+              categories: response.categories
+            }
+          };
+
         }
-      ],
-      chart: {
-        type: "bar",
-        height: 350
-      },
-      plotOptions: {
-        bar: {
-          distributed: true
-        }
-      },
-      xaxis: {
-        categories: ["Brasil", "EUA", "Canadá", "França", "China", "Índia"]
       }
-    };
+    )
+
+    
   }
 }
